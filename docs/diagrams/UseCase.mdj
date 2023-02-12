@@ -6671,7 +6671,7 @@
 										"reference": {
 											"$ref": "AAAAAAGGRovh3K6cesY="
 										},
-										"aggregation": "shared"
+										"aggregation": "composite"
 									}
 								}
 							]
@@ -6886,7 +6886,7 @@
 										"reference": {
 											"$ref": "AAAAAAGGRovh3K6cesY="
 										},
-										"aggregation": "shared"
+										"aggregation": "composite"
 									}
 								}
 							]
