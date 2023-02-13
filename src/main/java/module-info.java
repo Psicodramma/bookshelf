@@ -3,5 +3,6 @@ module com.psicodramma {
     requires javafx.fxml;
 
     opens com.psicodramma to javafx.fxml;
+    opens com.psicodramma.controller to javafx.fxml;
     exports com.psicodramma;
 }
