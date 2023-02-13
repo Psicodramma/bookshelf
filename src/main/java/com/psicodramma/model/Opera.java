@@ -4,7 +4,7 @@ import java.util.Set;
 public class Opera extends Interagibile{
     private int id;
     private String titolo;
-    private String trama;
+    private String descrizione;
     private String lingua;
     private Set<String> autori;
     private Set<String> generi;
