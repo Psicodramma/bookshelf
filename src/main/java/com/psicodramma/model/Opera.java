@@ -23,11 +23,11 @@ public class Opera extends Interagibile{
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
-    public String getTrama() {
-        return trama;
+    public String getDescrizione() {
+        return descrizione;
     }
-    public void setTrama(String trama) {
-        this.trama = trama;
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
     public String getLingua() {
         return lingua;

@@ -2,7 +2,7 @@ package com.psicodramma.model;
 
 import java.util.Set;
 
-public class Libreria {-
+public class Libreria {
     private Raccolta letti;
     private Raccolta daLeggere;
     private Raccolta inLettura;
