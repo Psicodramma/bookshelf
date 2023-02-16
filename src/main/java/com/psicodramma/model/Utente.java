@@ -1,18 +1,22 @@
 package com.psicodramma.model;
 
 import java.util.Set;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="Utente")
+@Table(name="utente")
 public class Utente {
     @Id
     private String username;
     private String password;
-
     private String nazionalita;
+
+    @Transient
     private Libreria libreria;
+    @Transient 
     private Set<Utente> amici;
+
+    public Utente(){ }
 
     public Utente(String username, String nazionalita, String password) {
         this.username = username;
