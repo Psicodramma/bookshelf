@@ -4,7 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import com.psicodramma.App;
 
-public class SecondaryController {
+public class TimelineController {
 
     @FXML
     private void switchToPrimary() throws IOException {

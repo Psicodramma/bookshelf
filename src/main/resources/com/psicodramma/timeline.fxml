@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.TimelineController">
+   <children>
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" stylesheets="@timeline.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="750.0" prefWidth="700.0" />
+            <VBox fx:id="actionView" alignment="TOP_RIGHT" prefHeight="750.0" prefWidth="300.0" styleClass="pane" HBox.hgrow="ALWAYS">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ChoiceBox fx:id="languageSelector" layoutX="204.0" layoutY="127.0" prefHeight="25.0" prefWidth="87.0" AnchorPane.topAnchor="127.0" />
+                        <TextField fx:id="searchBox" layoutX="33.0" layoutY="60.0" prefHeight="40.0" prefWidth="235.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="60.0" />
+                        <Button layoutX="295.0" layoutY="127.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Cerca" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="127.0" />
+                        <ChoiceBox layoutX="117.0" layoutY="127.0" prefHeight="25.0" prefWidth="87.0" AnchorPane.topAnchor="127.0" />
+                        <ChoiceBox layoutX="30.0" layoutY="127.0" prefHeight="25.0" prefWidth="87.0" AnchorPane.topAnchor="127.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="400.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <LineChart fx:id="bookGraph" legendSide="TOP" prefHeight="350.0" prefWidth="300.0" title="Libri letti negli ultimi giorni" titleSide="BOTTOM" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <xAxis>
+                            <CategoryAxis fx:id="bookgraph" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                        <ListView fx:id="latestBooks" layoutY="350.0" prefHeight="200.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <rotationAxis>
+      <Point3D />
+   </rotationAxis>
+</AnchorPane>
