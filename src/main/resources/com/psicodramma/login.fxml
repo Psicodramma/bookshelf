@@ -10,15 +10,16 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.AccessController">
    <children>
-      <Button layoutX="100.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="25.0" prefWidth="70.0" text="Accedi" />
-      <TextField layoutX="100.0" layoutY="181.0" prefHeight="25.0" prefWidth="160.0" />
-      <TextField layoutX="100.0" layoutY="227.0" prefHeight="25.0" prefWidth="160.0" />
+      
+      <TextField fx:id="usernameTextbox" layoutX="100.0" layoutY="181.0" prefHeight="25.0" prefWidth="160.0" />
+      <TextField fx:id="passwordTextbox" layoutX="100.0" layoutY="227.0" prefHeight="25.0" prefWidth="160.0" />
       <Label layoutX="100.0" layoutY="87.0" prefHeight="25.0" prefWidth="160.0" text="Login">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <Label layoutX="100.0" layoutY="127.0" prefHeight="25.0" prefWidth="160.0" text="Benvenuto in bookshelf!" />
+      <Button layoutX="100.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="25.0" prefWidth="70.0" text="Accedi" />
       <Button layoutX="190.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#switchToRegister" prefHeight="25.0" prefWidth="70.0" text="Registrati" />
       <ImageView fitHeight="400.0" fitWidth="383.0" layoutX="360.0" pickOnBounds="true" smooth="false">
          <image>
@@ -27,5 +28,6 @@
       </ImageView>
       <Label layoutX="100.0" layoutY="164.0" text="Username" />
       <Label layoutX="100.0" layoutY="210.0" text="Password" />
+      <Button layoutX="121.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#recuperaPassword" text="Recupera password" />
    </children>
 </Pane>

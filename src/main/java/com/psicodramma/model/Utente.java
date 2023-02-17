@@ -3,7 +3,7 @@ package com.psicodramma.model;
 import java.util.Set;
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name="utente")
 @Table(name="utente")
 public class Utente {
     @Id
