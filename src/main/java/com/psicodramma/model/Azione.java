@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Azione extends Interagibile{
     private int id;
     private Edizione edizione;
-    private enum tipoAzione { letti, daLeggere, inLettura , accantonati};
+    public enum tipoAzione { letti, daLeggere, inLettura , accantonati};
     private tipoAzione azione;
     private LocalDateTime timestamp;
 
