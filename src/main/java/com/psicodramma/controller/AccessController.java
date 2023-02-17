@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 
 import com.psicodramma.App;
 import com.psicodramma.model.Utente;
+import com.psicodramma.UIControls.ToastController;
 
 public class AccessController {
     @FXML protected TextField usernameTextbox;
@@ -47,20 +48,21 @@ public class AccessController {
         if(username.equals("")) 
             ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
         else{
-            String password = passwordTextbox.getText();
-            EntityManager em=emf.createEntityManager(); 
-            em.getTransaction().begin(); 
-            long num = (long) em.createNativeQuery("select count(*) from utente where username = ?1 and password = ?2")
-                .setParameter(1, username)
-                .setParameter(2, password)
-                .getSingleResult();
-            if(num>0){
-                ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "Accesso effettuato");
-            }else{
-                ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Accesso Negato");
-            }
+        String password = passwordTextbox.getText();
+        EntityManager em=emf.createEntityManager(); 
+        em.getTransaction().begin(); 
+        long num = (long) em.createNativeQuery("select count(*) from utente where username = ?1 and password = ?2")
+        .setParameter(1, username)
+        .setParameter(2, password)
+        .getSingleResult();
+        if(num>0){
+            ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "Accesso effettuato");
+            App.setRoot("timeline");
+        }else{
+            ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Accesso Negato");
         }
-        
+    }
+
     }
 
     @FXML
@@ -69,23 +71,23 @@ public class AccessController {
         if(usernameTextbox.getText().equals("")){
             ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
         }else{
-            Utente u = new Utente(usernameTextbox.getText(), nationalityTextbox.getText(), passwordTextbox.getText());
+        Utente u = new Utente(usernameTextbox.getText(), nationalityTextbox.getText(), passwordTextbox.getText());
 
-            EntityManager em=emf.createEntityManager(); 
+        EntityManager em=emf.createEntityManager(); 
 
-            try{
-                em.getTransaction().begin(); 
-                em.persist(u);
-                em.getTransaction().commit();
-                ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
+        try{
+            em.getTransaction().begin(); 
+            em.persist(u);
+            em.getTransaction().commit();
+            ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
 
-            }catch(PersistenceException e){
+        }catch(PersistenceException e){
                 ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "L'utente è già registrato");
-            }
-            
-            em.close(); 
-            //emf.close();  
-            //App.setRoot("timeline");
+        }
+        
+        em.close(); 
+        //emf.close();  
+        //App.setRoot("timeline");
         }
     }
 
@@ -94,16 +96,16 @@ public class AccessController {
         String username = usernameTextbox.getText();
         if(username.equals("")) ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
         else{
-            EntityManager em=emf.createEntityManager(); 
-            em.getTransaction().begin();
-            try{
-            String pwd = (String) em.createNativeQuery("select password from utente where username = ?1")
-                .setParameter(1, username)
-                .getSingleResult();
-            passwordTextbox.setText(pwd);
-            } catch(NoResultException e){
-                ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Username non trovato");
-            }
+        EntityManager em=emf.createEntityManager(); 
+        em.getTransaction().begin();
+        try{
+        String pwd = (String) em.createNativeQuery("select password from utente where username = ?1")
+            .setParameter(1, username)
+            .getSingleResult();
+        passwordTextbox.setText(pwd);
+        } catch(NoResultException e){
+            ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Username non trovato");
+        }
         }
     }
 }

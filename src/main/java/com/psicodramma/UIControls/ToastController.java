@@ -1,4 +1,4 @@
-package com.psicodramma.controller;
+package com.psicodramma.UIControls;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -63,7 +63,7 @@ public class ToastController {
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ToastController.class.getResource("/com/psicodramma/toastPopup.fxml"));
+            loader.setLocation(ToastController.class.getResource("/com/psicodramma/custom/toastPopup.fxml"));
             loader.load();
             ToastController ce = loader.getController();
             ce.setToast(toastType,text);

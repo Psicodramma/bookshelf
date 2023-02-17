@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<HBox fx:id="containerToast" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.ToastController">
+<HBox fx:id="containerToast" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.UIControls.ToastController">
    <children>
       <Label fx:id="textToast" text="TEST" textAlignment="CENTER">
          <font>

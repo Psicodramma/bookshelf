@@ -2,40 +2,53 @@ package com.psicodramma.UIControls;
 
 import java.io.IOException;
 
-import javafx.beans.property.StringProperty;
+import com.psicodramma.model.Azione;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 
-public class ActionPane {
-    @FXML private TextField textField;
+public class ActionPane extends ListCell<Azione>{
+    @FXML private Label labelUtente;
+    @FXML private Label labelAzione;
+    @FXML private Label labelTimestamp;
 
     public ActionPane() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("custom_control.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
+        loadFXML();
+    }
 
+    private void loadFXML() {
         try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/psicodramma/custom/action_pane.fxml"));
+            loader.setController(this);
+            //loader.setRoot(this);
+            loader.load();
         }
-    }
-
-    public String getText() {
-        return textProperty().get();
-    }
-
-    public void setText(String value) {
-        textProperty().set(value);
-    }
-
-    public StringProperty textProperty() {
-        return textField.textProperty();
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     protected void doSomething() {
         System.out.println("The button was clicked!");
+    }
+
+    @Override
+    protected void updateItem(Azione item, boolean empty) {
+        super.updateItem(item, empty);
+
+        if(empty || item == null) {
+            setText(null);
+            //setContentDisplay(ContentDisplay.TEXT_ONLY);
+        } else {
+            labelUtente.setText("URCA");
+            labelAzione.setText("");
+            labelTimestamp.setText("MAZURCA");
+
+            //setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        }
     }
 }

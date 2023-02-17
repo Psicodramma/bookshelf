@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.LibroController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="250.0" prefWidth="800.0">
+               <children>
+                  <ImageView fx:id="indietroButton" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="10.0">
+                     <image>
+                        <Image url="@icon/arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgLibro" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" x="50.0" y="50.0">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <VBox prefHeight="250.0" prefWidth="410.0">
+                     <children>
+                        <Label fx:id="labelNomeOpera" prefHeight="25.0" prefWidth="300.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Anno Pubblicazione" />
+                        <Label fx:id="labelAnno" />
+                        <Label text="Lingua Originale" />
+                        <Label fx:id="labelLingua" prefHeight="17.0" prefWidth="15.0" />
+                        <Label text="Descrizione" />
+                        <Label fx:id="labelDescrizione" />
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="imgLike" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/like.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgCommento" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/speech-bubble.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <TabPane prefHeight="401.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="tabCommenti" closable="false" text="Commenti">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                <Tab fx:id="tabEdizioni" closable="false" text="Edizioni">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
