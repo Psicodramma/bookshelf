@@ -21,7 +21,7 @@ public class AccessService {
                             .setParameter(2, password)
                             .getSingleResult();
 
-        return num > 1;
+        return num >= 1;
     }
 
     public boolean register(String username, String password, String nationality){
