@@ -1,20 +1,33 @@
 package com.psicodramma.model;
 import java.util.Set;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+@Entity
+@Table(name="opera")
 public class Opera extends Interagibile{
-    private int id;
+    @Id
+    private String id;
+
     private String titolo;
     private String descrizione;
+    @Column(name="lingua_originale")
     private String lingua;
+    @Transient
     private Set<String> autori;
+    @Transient
     private Set<String> generi;
     private int anno;
+    @Transient
     private Set<Edizione> edizioni;
     
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getTitolo() {

@@ -1,14 +1,39 @@
 package com.psicodramma.model;
 
+import java.sql.Date;
+
+import jakarta.persistence.*;
+
+@Entity
 public class Edizione extends Interagibile{
-    private int id;
-    private int dataPubblicazione;
+    @Id private int id;
+    
+    @Column(name="data_pubblicazione")
+    private Date dataPubblicazione;
+    @Column(name="numero_pagine")
     private int numeroPagine;
     private String isbn;
     private String editore;
     private String lingua;
+    @Column(name="paese_pubblicazione")
     private String paese;
+    @Transient
     private Opera opera;
+
+    public Edizione() {
+    }
+
+    public Edizione(int id, Date dataPubblicazione, int numeroPagine, String isbn, String editore, String lingua,
+            String paese, Opera opera) {
+        this.id = id;
+        this.dataPubblicazione = dataPubblicazione;
+        this.numeroPagine = numeroPagine;
+        this.isbn = isbn;
+        this.editore = editore;
+        this.lingua = lingua;
+        this.paese = paese;
+        this.opera = opera;
+    }
 
     public int getId() {
         return id;
@@ -16,10 +41,10 @@ public class Edizione extends Interagibile{
     public void setId(int id) {
         this.id = id;
     }
-    public int getDataPubblicazione() {
+    public Date getDataPubblicazione() {
         return dataPubblicazione;
     }
-    public void setDataPubblicazione(int dataPubblicazione) {
+    public void setDataPubblicazione(Date dataPubblicazione) {
         this.dataPubblicazione = dataPubblicazione;
     }
     public int getNumeroPagine() {
