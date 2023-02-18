@@ -9,11 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.layout.Pane;
 
 public class ActionPane extends ListCell<Azione>{
-    @FXML private Label labelUtente;
-    @FXML private Label labelAzione;
-    @FXML private Label labelTimestamp;
+    @FXML protected Pane pannello;
+    @FXML protected Label labelUtente;
+    @FXML protected Label labelAzione;
+    @FXML protected Label labelTimestamp;
 
     public ActionPane() {
         loadFXML();
@@ -42,13 +44,18 @@ public class ActionPane extends ListCell<Azione>{
 
         if(empty || item == null) {
             setText(null);
-            //setContentDisplay(ContentDisplay.TEXT_ONLY);
+            setGraphic(null);
         } else {
+            setVisible(true);
+            setGraphic(pannello);
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             labelUtente.setText("URCA");
-            labelAzione.setText("");
+            labelUtente.setVisible(true);
+            labelAzione.setText("HAHAHA");
+            labelAzione.setVisible(true);
             labelTimestamp.setText("MAZURCA");
+            labelTimestamp.setVisible(true);
 
-            //setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         }
     }
 }

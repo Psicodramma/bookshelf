@@ -2,11 +2,23 @@ package com.psicodramma.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+@Entity
+@Table(name = "azione")
 public class Azione extends Interagibile{
+    @Id
     private int id;
+    @Transient
     private Edizione edizione;
+    
     public enum tipoAzione { letti, daLeggere, inLettura , accantonati};
+    @Transient
     private tipoAzione azione;
+    
     private LocalDateTime timestamp;
 
     public int getId() {

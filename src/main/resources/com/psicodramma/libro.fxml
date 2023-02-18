@@ -42,16 +42,6 @@
                         <Label fx:id="labelDescrizione" />
                      </children>
                   </VBox>
-                  <ImageView fx:id="imgLike" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/like.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgCommento" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/speech-bubble.png" />
-                     </image>
-                  </ImageView>
                </children>
             </HBox>
             <TabPane prefHeight="401.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">

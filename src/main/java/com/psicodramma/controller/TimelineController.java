@@ -24,7 +24,10 @@ public class TimelineController {
     private ObservableList<Azione> studentList;
 
     public TimelineController() {
-        studentList = FXCollections.observableArrayList();
+        // inizializzo le azioni qui
+        var em = emf.createEntityManager();
+        var res = em.createNativeQuery("select * from azione order by data desc", Azione.class).getResultList();
+        studentList = FXCollections.observableArrayList(res);
     }
      
     @FXML
@@ -34,21 +37,17 @@ public class TimelineController {
         } else {
             System.out.println("student list is empty");
         }
-        EntityManager em = emf.createEntityManager();
         // leggo l'utente
         
         // leggo le azioni che puó vedere
 
         //inizializzo la lista
-        actionViewList.setCellFactory(new ActionPaneFactory());
-        ObservableList<Azione> list = FXCollections.observableArrayList();
-        list.add(new Azione());
-        actionViewList.setItems(list);
     }
 
     private void setupListView() {
-        actionViewList.setItems(studentList);
+        // actionViewList.setCellFactory(new ActionPaneFactory());
         actionViewList.setCellFactory((listView) -> new ActionPane());
+        actionViewList.setItems(studentList);
     }
 
     @FXML
