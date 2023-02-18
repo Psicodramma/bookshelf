@@ -18,21 +18,12 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.TimelineController">
    <children>
-      <HBox prefHeight="750.0" prefWidth="1000.0" stylesheets="@css\timeline.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="750.0" prefWidth="1000.0" stylesheets="@css\timeline.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox prefHeight="750.0" prefWidth="700.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="750.0" prefWidth="700.0" HBox.hgrow="ALWAYS">
                <children>
-                  <AnchorPane>
+                  <AnchorPane prefHeight="72.0" prefWidth="598.0" VBox.vgrow="NEVER">
                      <children>
-                        <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="583.0">
-                                 <children>
-                                    <ListView fx:id="actionViewList" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="554.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </ScrollPane>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                            <image>
                               <Image url="@icon/filter.png" />
@@ -45,9 +36,22 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="22.0" layoutY="23.0" pannable="true" prefHeight="689.0" prefWidth="598.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane maxWidth="900.0">
+                                 <children>
+                                    <ListView fx:id="actionViewList" maxWidth="1000.0" prefHeight="675.0" prefWidth="585.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
                </children>
             </VBox>
-            <VBox alignment="TOP_RIGHT" fillWidth="false" prefHeight="750.0" prefWidth="300.0" styleClass="pane" HBox.hgrow="NEVER">
+            <VBox alignment="TOP_RIGHT" prefHeight="750.0" prefWidth="300.0" styleClass="pane" HBox.hgrow="SOMETIMES">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -61,9 +65,9 @@
                         <ChoiceBox layoutX="30.0" layoutY="127.0" prefHeight="25.0" prefWidth="87.0" AnchorPane.topAnchor="127.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="400.0" VBox.vgrow="ALWAYS">
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" VBox.vgrow="NEVER">
                      <children>
-                        <LineChart fx:id="bookGraph" legendSide="TOP" prefHeight="300.0" prefWidth="400.0" title="Libri letti negli ultimi giorni" titleSide="BOTTOM" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <LineChart fx:id="bookGraph" legendSide="TOP" prefHeight="300.0" prefWidth="400.0" title="Libri letti negli ultimi giorni" titleSide="BOTTOM" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <xAxis>
                             <CategoryAxis fx:id="bookgraph" side="BOTTOM" />
                           </xAxis>
@@ -71,7 +75,11 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
-                        <ListView fx:id="latestBooks" layoutY="350.0" prefHeight="250.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane VBox.vgrow="ALWAYS">
+                     <children>
+                        <ListView fx:id="latestBooks" prefHeight="250.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </children>

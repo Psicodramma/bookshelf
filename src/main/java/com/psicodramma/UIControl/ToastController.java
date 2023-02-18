@@ -1,4 +1,4 @@
-package com.psicodramma.UIControls;
+package com.psicodramma.UIControl;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

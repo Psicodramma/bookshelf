@@ -9,8 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
 import com.psicodramma.App;
-import com.psicodramma.UIControls.ActionPane;
-import com.psicodramma.UIControls.ActionPaneFactory;
+import com.psicodramma.UIControl.ActionPane;
+import com.psicodramma.UIControl.ActionPaneFactory;
 import com.psicodramma.model.Azione;
 
 import jakarta.persistence.EntityManager;

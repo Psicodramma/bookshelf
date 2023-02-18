@@ -1,4 +1,4 @@
-package com.psicodramma.UIControls;
+package com.psicodramma.UIControl;
 
 import javafx.util.Callback;
 import com.psicodramma.model.Azione;

@@ -6,25 +6,26 @@ import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import jakarta.persistence.*;
-
 import com.psicodramma.App;
-import com.psicodramma.model.Utente;
-import com.psicodramma.UIControls.ToastController;
+import com.psicodramma.UIControl.ToastController;
+import com.psicodramma.service.AccessService;
 
 public class AccessController {
     @FXML protected TextField usernameTextbox;
     @FXML protected TextField passwordTextbox;
     @FXML protected TextField nationalityTextbox;
-
     
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");  
     private Object sharedData;
+    private AccessService accessService;
+
+    public AccessController(){
+        accessService = new AccessService();
+    }
 
     @FXML
     protected void initialize(){
         sharedData = App.getData();
-        if(!Objects.isNull(sharedData)) System.out.println("Stringa passata: "+Objects.toString(sharedData));
+        if(!Objects.isNull(sharedData)) System.out.println("Stringa passata: " + Objects.toString(sharedData));
     }
 
     @FXML
@@ -45,67 +46,52 @@ public class AccessController {
     private void login() throws IOException {
         //controllo dei dati
         String username = usernameTextbox.getText();
-        if(username.equals("")) 
+        if(username.equals("")) {
             ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
-        else{
-        String password = passwordTextbox.getText();
-        EntityManager em=emf.createEntityManager(); 
-        em.getTransaction().begin(); 
-        long num = (long) em.createNativeQuery("select count(*) from utente where username = ?1 and password = ?2")
-        .setParameter(1, username)
-        .setParameter(2, password)
-        .getSingleResult();
-        if(num>0){
-            ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "Accesso effettuato");
-            App.setRoot("timeline");
-        }else{
-            ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Accesso Negato");
-        }
-    }
+        } else {
+            String password = passwordTextbox.getText();
+            
+            boolean canLogin = accessService.login(username, password);
 
+            if(canLogin){
+                ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "Accesso effettuato");
+                App.setRoot("timeline");
+            }else{
+                ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Accesso Negato");
+            }
+        }
     }
 
     @FXML
     private void register() throws IOException {
         //controllo dei dati
-        if(usernameTextbox.getText().equals("")){
-            ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
+        if(usernameTextbox.getText().equals("") || nationalityTextbox.getText().equals("") || passwordTextbox.getText().equals("")){
+            ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Campi Obbligatori");
         }else{
-        Utente u = new Utente(usernameTextbox.getText(), nationalityTextbox.getText(), passwordTextbox.getText());
+            boolean success = accessService.register(usernameTextbox.getText(), passwordTextbox.getText(), nationalityTextbox.getText());
 
-        EntityManager em=emf.createEntityManager(); 
-
-        try{
-            em.getTransaction().begin(); 
-            em.persist(u);
-            em.getTransaction().commit();
-            ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
-
-        }catch(PersistenceException e){
+            if(success){
+                ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
+            } else {
                 ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "L'utente è già registrato");
-        }
-        
-        em.close(); 
-        //emf.close();  
-        //App.setRoot("timeline");
+            }
         }
     }
 
     @FXML
     private void recuperaPassword() throws IOException{
         String username = usernameTextbox.getText();
-        if(username.equals("")) ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
-        else{
-        EntityManager em=emf.createEntityManager(); 
-        em.getTransaction().begin();
-        try{
-        String pwd = (String) em.createNativeQuery("select password from utente where username = ?1")
-            .setParameter(1, username)
-            .getSingleResult();
-        passwordTextbox.setText(pwd);
-        } catch(NoResultException e){
-            ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Username non trovato");
-        }
+        if(username.equals("")){
+            ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
+        } else {
+            String pwd = accessService.restorePassword(username);
+            
+            if(!pwd.equals("")){
+                passwordTextbox.setText(pwd);
+            } else {
+                ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Username non trovato");
+            }
+        
         }
     }
 }

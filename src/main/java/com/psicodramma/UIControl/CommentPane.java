@@ -1,4 +1,4 @@
-package com.psicodramma.UIControls;
+package com.psicodramma.UIControl;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
