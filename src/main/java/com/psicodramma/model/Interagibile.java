@@ -3,13 +3,13 @@ package com.psicodramma.model;
 import java.util.Set;
 
 public abstract class Interagibile {
-    private Set<Utente> like;
+    private Set<String> like;
     private Set<Commento> commenti;
 
-    public Set<Utente> getLike() {
+    public Set<String> getLike() {
         return like;
     }
-    public void setLike(Set<Utente> like) {
+    public void setLike(Set<String> like) {
         this.like = like;
     }
     public Set<Commento> getCommenti() {
