@@ -14,7 +14,7 @@ import com.psicodramma.service.TimelineService;
 public class TimelineController {
     @FXML protected ListView<Azione> actionViewList;
 
-    private ObservableList<Azione> actionList;
+    private ObservableList<Azione> actionList = FXCollections.observableArrayList();
     private TimelineService timelineService;
     private Utente utente;
     
@@ -22,7 +22,7 @@ public class TimelineController {
         this.utente = ((Utente)App.getData());
         timelineService = new TimelineService();
         var res = timelineService.getActionList(new Utente());
-        actionList = FXCollections.observableArrayList(res);
+        actionList.setAll(res);
     }
      
     @FXML
@@ -35,8 +35,8 @@ public class TimelineController {
     }
 
     private void setupListView() {
-        actionViewList.setCellFactory((param) -> new ActionPane());
         actionViewList.setItems(actionList);
+        actionViewList.setCellFactory((param) -> new ActionPane());
     }
 
 
