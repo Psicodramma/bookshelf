@@ -2,12 +2,21 @@ package com.psicodramma.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+@Entity
+@Table(name = "commento")
 public class Commento extends Interagibile{
-    private String id;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "id_utente")
     private Utente utente;
     private String testo;
     private LocalDateTime timestamp;
-    private Interagibile interagibile;
+    @Transient private Interagibile interagibile;
 
     public String getId() {
         return id;

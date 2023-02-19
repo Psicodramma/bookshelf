@@ -3,15 +3,13 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 @Entity
 @Table(name="opera")
 public class Opera extends Interagibile{
-    @Id
-    private String id;
-
     private String titolo;
     private String descrizione;
     @Column(name="lingua_originale")
@@ -21,27 +19,17 @@ public class Opera extends Interagibile{
     @Transient
     private Set<String> generi;
     private int anno;
-    @Transient
+    @OneToMany
+    @JoinColumn(name = "id_opera")
     private Set<Edizione> edizioni;
-    
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getTitolo() {
-        return titolo;
-    }
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
-    }
+
     public String getDescrizione() {
         return descrizione;
     }
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
+
     public String getLingua() {
         return lingua;
     }
@@ -71,6 +59,12 @@ public class Opera extends Interagibile{
     }
     public void setEdizioni(Set<Edizione> edizioni) {
         this.edizioni = edizioni;
+    }
+    public String getTitolo() {
+        return titolo;
+    }
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
     
 }

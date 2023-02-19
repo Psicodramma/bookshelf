@@ -6,8 +6,6 @@ import jakarta.persistence.*;
 
 @Entity
 public class Edizione extends Interagibile{
-    @Id private String id;
-    
     @Column(name="data_pubblicazione")
     private Date dataPubblicazione;
     @Column(name="numero_pagine")
@@ -21,27 +19,6 @@ public class Edizione extends Interagibile{
     @JoinColumn(name = "id_opera")
     private Opera opera;
 
-    public Edizione() {
-    }
-
-    public Edizione(String id, Date dataPubblicazione, int numeroPagine, String isbn, String editore, String lingua,
-            String paese, Opera opera) {
-        this.id = id;
-        this.dataPubblicazione = dataPubblicazione;
-        this.numeroPagine = numeroPagine;
-        this.isbn = isbn;
-        this.editore = editore;
-        this.lingua = lingua;
-        this.paese = paese;
-        this.opera = opera;
-    }
-
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
     public Date getDataPubblicazione() {
         return dataPubblicazione;
     }
