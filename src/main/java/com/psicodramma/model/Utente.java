@@ -8,7 +8,9 @@ import jakarta.persistence.*;
 public class Utente {
     @Id
     private String username;
+    @Basic(fetch = FetchType.LAZY)
     private String password;
+    @Basic(fetch = FetchType.LAZY)
     private String nazionalita;
 
     @Transient

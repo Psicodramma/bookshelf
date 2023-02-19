@@ -14,6 +14,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.TimelineController">
@@ -40,9 +41,13 @@
                      <children>
                         <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="22.0" layoutY="23.0" pannable="true" prefHeight="689.0" prefWidth="598.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
                            <content>
-                              <AnchorPane maxWidth="900.0">
+                              <AnchorPane>
                                  <children>
-                                    <ListView fx:id="actionViewList" maxWidth="1000.0" prefHeight="675.0" prefWidth="585.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <ListView fx:id="actionViewList" maxWidth="900.0" prefHeight="675.0" prefWidth="585.0" StackPane.alignment="CENTER" />
+                                       </children>
+                                    </StackPane>
                                  </children>
                               </AnchorPane>
                            </content>

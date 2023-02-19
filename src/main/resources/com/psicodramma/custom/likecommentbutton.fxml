@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="120.0" type="Pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.LikeCommentButton">
+<Pane fx:id="pannello" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.UIControl.LikeCommentButton">
    <children>
-      <ImageView fx:id="imgLike" fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgLike" fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" onMouseClicked="#editLike" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icon/like.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgCommento" fitHeight="32.0" fitWidth="32.0" layoutX="74.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgCommento" fitHeight="32.0" fitWidth="32.0" layoutX="104.0" layoutY="4.0" onMouseClicked="#addComment" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icon/speech-bubble.png" />
          </image>
       </ImageView>
+      <Label fx:id="labelLikeCount" layoutX="61.0" layoutY="12.0" prefHeight="17.0" prefWidth="32.0" />
    </children>
-</fx:root>
+</Pane>

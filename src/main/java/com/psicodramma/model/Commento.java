@@ -3,16 +3,16 @@ package com.psicodramma.model;
 import java.time.LocalDateTime;
 
 public class Commento extends Interagibile{
-    private int id;
+    private String id;
     private Utente utente;
     private String testo;
     private LocalDateTime timestamp;
     private Interagibile interagibile;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     public Utente getUtente() {

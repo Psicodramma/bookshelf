@@ -12,15 +12,20 @@ public class AccessService {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("default"); 
     
+    public Utente getUser(String username){
+        EntityManager em=emf.createEntityManager(); 
+        Utente u = em.getReference(Utente.class, username);
+        em.close();
+        return u;
+    }
 
     public boolean login(String username, String password){
         EntityManager em=emf.createEntityManager(); 
-        em.getTransaction().begin(); 
         long num = (long) em.createNativeQuery("select count(*) from utente where username = ?1 and password = ?2")
                             .setParameter(1, username)
                             .setParameter(2, password)
                             .getSingleResult();
-
+        em.close();
         return num >= 1;
     }
 
@@ -33,6 +38,7 @@ public class AccessService {
             em.getTransaction().begin(); 
             em.persist(u);
             em.getTransaction().commit();
+            em.close();
         }catch(PersistenceException e){
             success = false;
         }
@@ -44,11 +50,12 @@ public class AccessService {
         String pwd = "";
         EntityManager em=emf.createEntityManager(); 
 
-        try{   
-            em.getTransaction().begin(); 
+        try{    
             pwd = (String) em.createNativeQuery("select password from utente where username = ?1")
                                     .setParameter(1, username)
                                     .getSingleResult();
+                                
+            em.close(); 
         } catch(NoResultException e){ }
 
         return pwd;

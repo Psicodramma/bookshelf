@@ -20,9 +20,7 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "azione")
-public class Azione extends Interagibile{
-    @Id
-    private String id;
+public class Azione extends Interagibile {
     
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "id_edizione")
@@ -38,12 +36,6 @@ public class Azione extends Interagibile{
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
     public Edizione getEdizione() {
         return edizione;
     }

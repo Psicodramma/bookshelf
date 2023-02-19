@@ -1,6 +1,7 @@
 module com.psicodramma {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.graphics;
     requires jakarta.persistence;
     requires java.sql;
 

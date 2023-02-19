@@ -2,10 +2,22 @@ package com.psicodramma.model;
 
 import java.util.Set;
 
-public abstract class Interagibile {
-    private Set<String> like;
-    private Set<Commento> commenti;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 
+@MappedSuperclass
+public abstract class Interagibile {
+    @Id protected String id;
+    @Transient protected Set<String> like;
+    @Transient protected Set<Commento> commenti;
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
     public Set<String> getLike() {
         return like;
     }
