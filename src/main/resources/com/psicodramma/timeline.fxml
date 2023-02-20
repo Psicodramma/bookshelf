@@ -2,8 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -72,14 +72,14 @@
                   </AnchorPane>
                   <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" VBox.vgrow="NEVER">
                      <children>
-                        <LineChart fx:id="bookGraph" legendSide="TOP" prefHeight="300.0" prefWidth="400.0" title="Libri letti negli ultimi giorni" titleSide="BOTTOM" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <BarChart fx:id="actionWeekChart" prefHeight="300.0" prefWidth="402.0">
                           <xAxis>
-                            <CategoryAxis fx:id="bookgraph" side="BOTTOM" />
+                            <CategoryAxis side="BOTTOM" />
                           </xAxis>
                           <yAxis>
                             <NumberAxis side="LEFT" />
                           </yAxis>
-                        </LineChart>
+                        </BarChart>
                      </children>
                   </AnchorPane>
                   <AnchorPane VBox.vgrow="ALWAYS">

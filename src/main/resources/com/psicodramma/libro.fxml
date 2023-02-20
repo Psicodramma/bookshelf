@@ -17,7 +17,7 @@
          <children>
             <HBox prefHeight="250.0" prefWidth="800.0">
                <children>
-                  <ImageView fx:id="indietroButton" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="10.0">
+                  <ImageView fx:id="indietroButton" onMouseClicked="#indietro" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="10.0">
                      <image>
                         <Image url="@icon/arrow.png" />
                      </image>
@@ -34,12 +34,33 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
+                        <Label text="Autori" />
+                        <Label fx:id="labelAutori" prefHeight="17.0" prefWidth="313.0" wrapText="true">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
                         <Label text="Anno Pubblicazione" />
-                        <Label fx:id="labelAnno" />
+                        <Label fx:id="labelAnno" prefHeight="17.0" prefWidth="107.0">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Label>
                         <Label text="Lingua Originale" />
-                        <Label fx:id="labelLingua" prefHeight="17.0" prefWidth="15.0" />
+                        <Label fx:id="labelLingua" prefHeight="17.0" prefWidth="123.0">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Label>
+                        <Label text="Generi" />
+                        <Label fx:id="labelGeneri" prefHeight="17.0" prefWidth="313.0" wrapText="true">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
                         <Label text="Descrizione" />
-                        <Label fx:id="labelDescrizione" />
+                        <Label fx:id="labelDescrizione" alignment="TOP_LEFT" prefHeight="51.0" prefWidth="419.0" wrapText="true">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font></Label>
                      </children>
                   </VBox>
                </children>
