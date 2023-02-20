@@ -28,9 +28,9 @@ public class Opera extends Interagibile{
     public Opera() {
     }
 
-    public Opera(String id, String titolo, String descrizione, String lingua, Set<String> autori, Set<String> generi, int anno,
+    public Opera(int id, String titolo, String descrizione, String lingua, Set<String> autori, Set<String> generi, int anno,
             Set<Edizione> edizioni) {
-        super.id = id;
+        super.setId(id);
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.lingua = lingua;
@@ -100,15 +100,9 @@ public class Opera extends Interagibile{
         if (getClass() != obj.getClass())
             return false;
         Opera other = (Opera) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
+        if (super.getId() != other.getId())
             return false;
         return true;
     }
-
-    
-    
 }
 
