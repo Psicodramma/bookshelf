@@ -34,8 +34,10 @@ public class LikeCommentButton{
     }
 
     public void setInteragibile(Interagibile interagibile) {
+        Utente utente = (Utente) App.getData();
         this.interagibile = interagibile;
         interagibile.setLike(interactionService.getLikes(interagibile));
+        stateLike = interagibile.getLike().contains(utente.getUsername());
         setLikeLabel();
     }
     

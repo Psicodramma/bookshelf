@@ -31,9 +31,11 @@ public class InteractionService {
 
     public void addLike(Interagibile inter, Utente user){
         interagibileDao.addLike(inter, user);
+        inter.getLike().add(user.getUsername());
     }
 
     public void removeLike(Interagibile inter, Utente user){
-
+        interagibileDao.removeLike(inter, user);
+        inter.getLike().remove(user.getUsername());
     }
 }

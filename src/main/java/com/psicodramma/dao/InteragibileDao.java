@@ -11,6 +11,7 @@ import com.psicodramma.model.Utente;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceException;
 
 public class InteragibileDao{
     private EntityManagerFactory emf;
@@ -62,12 +63,37 @@ public class InteragibileDao{
 
     public void addLike(Interagibile inter, Utente user) {
         EntityManager em=emf.createEntityManager();
-        String query = "insert into mi_piace values(?, ?)";
-
-        em.createNativeQuery(query)
-            .setParameter(1, "Tom")
-            .executeUpdate();
+        String query = "INSERT INTO mi_piace(id_riferimento, tipo_riferimento, id_utente) VALUES (?1, ?2, ?3)";
+        try{   
+            em.getTransaction().begin(); 
+            em.createNativeQuery(query)
+                .setParameter(1, inter.getId())
+                .setParameter(2, getSimpleClassName(inter))
+                .setParameter(3, user.getUsername())
+                .executeUpdate();
         
-        em.close();
+            em.getTransaction().commit();
+            em.close();
+        }catch(PersistenceException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void removeLike(Interagibile inter, Utente user) {
+        EntityManager em=emf.createEntityManager();
+        String query = "DELETE FROM public.mi_piace WHERE id_riferimento = ?1 AND tipo_riferimento = ?2 AND id_utente = ?3";
+        try{   
+            em.getTransaction().begin(); 
+            em.createNativeQuery(query)
+                .setParameter(1, inter.getId())
+                .setParameter(2, getSimpleClassName(inter))
+                .setParameter(3, user.getUsername())
+                .executeUpdate();
+        
+            em.getTransaction().commit();
+            em.close();
+        }catch(PersistenceException e){
+            e.printStackTrace();
+        }
     }
 }   
