@@ -23,7 +23,7 @@ public class OperaDao{
         emf = Persistence.createEntityManagerFactory(persistenceUnit);
     }
 
-    public Set<String> getAutoriByOpera(String id){
+    public Set<String> getAutoriByOpera(int id){
         EntityManager em=emf.createEntityManager();
         @SuppressWarnings("unchecked")
         Stream<String> autStream = 
@@ -37,7 +37,7 @@ public class OperaDao{
         return aut;
     }
 
-    public Set<String> getGeneriByOpera(String id){
+    public Set<String> getGeneriByOpera(int id){
         EntityManager em=emf.createEntityManager();
         @SuppressWarnings("unchecked")
         Stream<String> genStream = 
@@ -50,7 +50,7 @@ public class OperaDao{
         return gen;
     }
 
-    public Opera getOperaById(String id) {
+    public Opera getOperaById(int id) {
         EntityManager em=emf.createEntityManager();
         Opera op = em.find(Opera.class, id);
         em.close();

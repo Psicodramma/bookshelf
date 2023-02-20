@@ -30,7 +30,7 @@ public class LibroController {
     @FXML
     private void initialize() { 
         //idOpera = (String) App.getData(); 
-        String idOpera = "1";
+        int idOpera = 1;
         op = opDao.getOperaById(idOpera);
         if(!Objects.isNull(op)){
             labelNomeOpera.setText(op.getTitolo());
