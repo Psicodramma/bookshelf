@@ -6,7 +6,21 @@
             <properties>
                   <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost/bookshelf"/>
                   <property name="jakarta.persistence.jdbc.user" value="postgres"/>
-                  <property name="jakarta.persistence.jdbc.password" value="silviu"/>
+                  <property name="jakarta.persistence.jdbc.password" value="raffa"/>
+                  <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+                  <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.PostgreSQLPlatform"/>
+                  <property name="eclipselink.jdbc.uppercase-columns" value="true"/>
+            </properties>
+      </persistence-unit>
+
+      <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
+            <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+            <exclude-unlisted-classes>false</exclude-unlisted-classes>
+      
+            <properties>
+                  <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost/bookshelfTest"/>
+                  <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+                  <property name="jakarta.persistence.jdbc.password" value="raffa"/>
                   <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
                   <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.PostgreSQLPlatform"/>
                   <property name="eclipselink.jdbc.uppercase-columns" value="true"/>

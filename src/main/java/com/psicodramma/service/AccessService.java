@@ -10,11 +10,20 @@ import jakarta.persistence.PersistenceException;
 
 public class AccessService {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("default"); 
+    private EntityManagerFactory emf; 
     
-    public Utente getUser(String username){
+    public AccessService(){
+        emf = Persistence.createEntityManagerFactory("default");
+    }
+
+    public AccessService(String persistenceUnit){
+        emf = Persistence.createEntityManagerFactory(persistenceUnit);
+    }
+
+    public Utente getUser(String username) throws PersistenceException{
         EntityManager em=emf.createEntityManager(); 
-        Utente u = em.getReference(Utente.class, username);
+        Utente u;
+        u = em.getReference(Utente.class, username);
         em.close();
         return u;
     }
@@ -26,6 +35,7 @@ public class AccessService {
                             .setParameter(2, password)
                             .getSingleResult();
         em.close();
+        
         return num >= 1;
     }
 

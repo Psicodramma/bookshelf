@@ -17,14 +17,18 @@ public class OperaDao{
 
     public OperaDao(){
         emf = Persistence.createEntityManagerFactory("default");
+    };
+
+    public OperaDao(String persistenceUnit){
+        emf = Persistence.createEntityManagerFactory(persistenceUnit);
     }
 
-    private Set<String> getAutoriByOpera(String id){
+    public Set<String> getAutoriByOpera(String id){
         EntityManager em=emf.createEntityManager();
         @SuppressWarnings("unchecked")
         Stream<String> autStream = 
             em.createNativeQuery(
-                "Select concat_ws(?1, cognome, nome) from autore a join autore_opera ao on a.id = ao.id_autore where id_opera = ?2")
+                "Select concat_ws(?1, nome, cognome) from autore a join autore_opera ao on a.id = ao.id_autore where id_opera = ?2")
             .setParameter(1, ' ')
             .setParameter(2, id)
             .getResultStream();
@@ -33,7 +37,7 @@ public class OperaDao{
         return aut;
     }
 
-    private Set<String> getGeneriByOpera(String id){
+    public Set<String> getGeneriByOpera(String id){
         EntityManager em=emf.createEntityManager();
         @SuppressWarnings("unchecked")
         Stream<String> genStream = 
