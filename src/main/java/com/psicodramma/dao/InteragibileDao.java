@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.psicodramma.model.Commento;
 import com.psicodramma.model.Interagibile;
+import com.psicodramma.model.Utente;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -27,7 +28,7 @@ public class InteragibileDao{
         riferimento.setLike(getLikeSet(riferimento));
     }
     
-    private Set<Commento> getCommentiSet(Interagibile riferimento){
+    public Set<Commento> getCommentiSet(Interagibile riferimento){
         EntityManager em=emf.createEntityManager();
         @SuppressWarnings("unchecked")
         Stream<Commento> commStream = 
@@ -45,7 +46,7 @@ public class InteragibileDao{
         return comm;
     }
 
-    private Set<String> getLikeSet(Interagibile riferimento){
+    public Set<String> getLikeSet(Interagibile riferimento){
         EntityManager em=emf.createEntityManager();
         @SuppressWarnings("unchecked")
         Stream<String> likeStream = 
@@ -57,5 +58,16 @@ public class InteragibileDao{
         Set<String> like = likeStream.collect(Collectors.toSet());
         em.close();
         return like;
+    }
+
+    public void addLike(Interagibile inter, Utente user) {
+        EntityManager em=emf.createEntityManager();
+        String query = "insert into mi_piace values(?, ?)";
+
+        em.createNativeQuery(query)
+            .setParameter(1, "Tom")
+            .executeUpdate();
+        
+        em.close();
     }
 }   

@@ -2,13 +2,12 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="pannello" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pannello" minHeight="-Infinity" prefHeight="100.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
    <Label fx:id="labelUtente" layoutX="17.0" layoutY="14.0" prefHeight="17.0" prefWidth="141.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
    <Label fx:id="labelTimestamp" layoutX="207.0" layoutY="14.0" prefHeight="17.0" prefWidth="150.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
-   <Label fx:id="labelAzione" layoutX="14.0" layoutY="59.0" prefHeight="17.0" prefWidth="300.0" AnchorPane.leftAnchor="14.0" />
-   <fx:include source="likecommentbutton.fxml" fx:id="placeholder" layoutX="336.0" layoutY="48.0" prefHeight="40.0" prefWidth="150.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+   <Label fx:id="labelAzione" layoutX="14.0" layoutY="59.0" prefHeight="17.0" prefWidth="300.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="59.0" />
+      <fx:include fx:id="likes" source="likecommentbutton.fxml" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="46.0" />
    </children>
 </AnchorPane>
