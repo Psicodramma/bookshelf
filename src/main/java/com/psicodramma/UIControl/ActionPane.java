@@ -5,24 +5,20 @@ import java.text.DateFormat;
 
 import com.psicodramma.model.Azione;
 import com.psicodramma.model.Interagibile;
-import com.psicodramma.model.Utente;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 public class ActionPane extends ListCell<Azione>{
-    @FXML protected AnchorPane pannello;
-    @FXML protected Label labelUtente;
-    @FXML protected Label labelAzione;
-    @FXML protected Label labelTimestamp;
-    @FXML protected Pane placeholder;
+    @FXML private AnchorPane pannello;
+    @FXML private Label labelUtente;
+    @FXML private Label labelAzione;
+    @FXML private Label labelTimestamp;
+    @FXML private LikeCommentButton likesController;
 
     private Interagibile interagibile;
 
@@ -65,15 +61,13 @@ public class ActionPane extends ListCell<Azione>{
             setText(null);
             setGraphic(null);
         } else {
-            setVisible(true);
+            interagibile = item;
             setGraphic(pannello);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            likesController.setInteragibile(item);
             labelUtente.setText(item.getUtente().getUsername());
             labelAzione.setText(item.getAzione().name() + " " + item.getEdizione().getOpera().getTitolo());
-            labelTimestamp.setText(DateFormat.getDateInstance().format(item.getTimestamp()));
-
-            interagibile = item;
-            placeholder.setUserData(interagibile);
+            labelTimestamp.setText(DateFormat.getDateInstance().format(item.getTimestamp())); 
         }
     }
 }

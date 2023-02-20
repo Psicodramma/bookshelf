@@ -1,6 +1,6 @@
 package com.psicodramma.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,14 +15,14 @@ public class Commento extends Interagibile{
     @JoinColumn(name = "id_utente")
     private Utente utente;
     private String testo;
-    private LocalDateTime timestamp;
+    private Date timestamp;
     @Transient private Interagibile interagibile;
 
-    public String getId() {
-        return id;
+    public int getId() {
+        return super.getId();
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int id) {
+        super.setId(id);
     }
     public Utente getUtente() {
         return utente;
@@ -36,10 +36,10 @@ public class Commento extends Interagibile{
     public void setTesto(String testo) {
         this.testo = testo;
     }
-    public LocalDateTime getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
     public Interagibile getInteragibile() {

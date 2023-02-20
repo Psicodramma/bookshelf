@@ -1,47 +1,59 @@
 package com.psicodramma.UIControl;
 
 import java.io.File;
-import java.io.IOException;
 
 import com.psicodramma.App;
+import com.psicodramma.model.Commento;
 import com.psicodramma.model.Interagibile;
 import com.psicodramma.model.Utente;
 import com.psicodramma.service.InteractionService;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-public class LikeCommentButton extends Pane{
-    @FXML protected ImageView imgLike;
-    private boolean state = false;
-    @FXML protected ImageView imgCommento;
-    @FXML protected Label labelLikeCount;
-    @FXML protected Pane pannello;
+public class LikeCommentButton{
+    @FXML private ImageView imgLike;
+    private boolean stateLike = false;
+    @FXML private ImageView imgCommento;
+    @FXML private Label labelLikeCount;
+    @FXML private Pane pannello;
+    @FXML private ActionPane pannelloController;
+    @FXML private CommentPane commentoController;
+    private boolean stateCommento = false;
 
     private InteractionService interactionService;
+    private Interagibile interagibile;
 
     public LikeCommentButton() {
-        super();
         interactionService = new InteractionService();
+    }
+
+    public void setInteragibile(Interagibile interagibile) {
+        this.interagibile = interagibile;
+        interagibile.setLike(interactionService.getLikes(interagibile));
+        setLikeLabel();
+    }
+    
+    public void setCommentoController(CommentPane commentoController) {
+        this.commentoController = commentoController;
     }
 
     @FXML
     private void initialize() {
-        // state = interagibile.getLike().contains(utente.getUsername());
         setLikeLabel();
     }
 
     @FXML
     protected void editLike() {
-        Interagibile interagibile = (Interagibile)pannello.getUserData();
         Utente utente = (Utente) App.getData();
         
-        state = !state;
-        if(state){
+        stateLike = !stateLike;
+        if(stateLike){
             interactionService.addLike(interagibile, utente);
         } else {
             interactionService.removeLike(interagibile, utente);
@@ -51,7 +63,7 @@ public class LikeCommentButton extends Pane{
 
     private void setLikeLabel(){
         Image image;
-        if(state){
+        if(stateLike){
             File file = new File("bookshelf/src/main/resources/com/psicodramma/icon/like_full.png");
             image = new Image(file.toURI().toString());
         } else {
@@ -59,12 +71,28 @@ public class LikeCommentButton extends Pane{
             image = new Image(file.toURI().toString());
         }
         imgLike.setImage(image);
-        // labelLikeCount.setText("" + interagibile.getLike().size());
-        labelLikeCount.setText("2");
+        if(interagibile != null){
+            labelLikeCount.setText("" + interagibile.getLike().size());
+        }
     }
 
     @FXML
     protected void addComment() {
-        System.out.println("The button was clicked!");
+        if(!(interagibile instanceof Commento)){
+            CommentTab ctrl = new CommentTab(1);
+            ctrl.setInteragibile(interagibile);
+            Stage stage = new Stage();
+            stage.setTitle("Commenti");
+            stage.setScene(new Scene(ctrl));
+            stage.show();
+        } else {
+            if(!stateCommento){
+                commentoController.loadSubLevel();
+            } else {
+                commentoController.unloadSubLevel();
+            }
+
+            stateCommento = !stateCommento;
+        }
     }
 }

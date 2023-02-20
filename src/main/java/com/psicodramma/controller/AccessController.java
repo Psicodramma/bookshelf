@@ -55,7 +55,6 @@ public class AccessController {
 
             if(canLogin){
                 ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "Accesso effettuato");
-                // BRUTTO!
                 App.setData(accessService.getUser(username));
                 App.setRoot("timeline");
             }else{

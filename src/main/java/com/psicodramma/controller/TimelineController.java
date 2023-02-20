@@ -1,6 +1,7 @@
 package com.psicodramma.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -30,10 +31,9 @@ public class TimelineController {
     public TimelineController() {
         this.utente = ((Utente)App.getData());
         timelineService = new TimelineService();
-        var res = timelineService.getActionList();
+        List<Azione> res = timelineService.getActionList();
         actionList.setAll(res);
         azioniGiorno = timelineService.getAzioniGiorno(utente);
-        
     }
      
     @FXML
