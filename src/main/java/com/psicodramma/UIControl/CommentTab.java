@@ -1,9 +1,9 @@
 package com.psicodramma.UIControl;
 
 import java.io.IOException;
+import java.util.Set;
 
 import com.psicodramma.App;
-import com.psicodramma.dao.InteragibileDao;
 import com.psicodramma.model.Commento;
 import com.psicodramma.model.Interagibile;
 import com.psicodramma.model.Utente;
@@ -50,7 +50,9 @@ public class CommentTab extends AnchorPane{
 
     public void setInteragibile(Interagibile interagibile) {
         this.interagibile = interagibile;
-        commentList.addAll(interactionService.getComment(interagibile));
+        Set<Commento> commenti = interactionService.getComment(interagibile);
+        interagibile.setCommenti(commenti);
+        commentList.addAll(commenti);
         checkList();
     }
 
@@ -69,6 +71,7 @@ public class CommentTab extends AnchorPane{
 
     @FXML
     private void sendCommento() {
-        
+        String testoCommento = textboxCommento.getText();
+        commentList.add(interactionService.addComment(interagibile, utente, testoCommento));
     }
 }

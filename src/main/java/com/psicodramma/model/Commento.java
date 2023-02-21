@@ -18,6 +18,17 @@ public class Commento extends Interagibile{
     private Date timestamp;
     @Transient private Interagibile interagibile;
 
+
+    public Commento() {
+    }
+
+    public Commento(Utente utente, String testo, Date timestamp, Interagibile interagibile) {
+        this.utente = utente;
+        this.testo = testo;
+        this.timestamp = timestamp;
+        this.interagibile = interagibile;
+    }
+    
     public int getId() {
         return super.getId();
     }

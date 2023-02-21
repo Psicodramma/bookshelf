@@ -61,14 +61,31 @@ public class InteragibileDao{
         return like;
     }
 
-    public void addLike(Interagibile inter, Utente user) {
+    public void addLike(Interagibile riferimento, Utente user) {
         EntityManager em=emf.createEntityManager();
         String query = "INSERT INTO mi_piace(id_riferimento, tipo_riferimento, id_utente) VALUES (?1, ?2, ?3)";
         try{   
             em.getTransaction().begin(); 
             em.createNativeQuery(query)
-                .setParameter(1, inter.getId())
-                .setParameter(2, getSimpleClassName(inter))
+                .setParameter(1, riferimento.getId())
+                .setParameter(2, getSimpleClassName(riferimento))
+                .setParameter(3, user.getUsername())
+                .executeUpdate();
+            em.getTransaction().commit();
+            em.close();
+        }catch(PersistenceException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void removeLike(Interagibile riferimento, Utente user) {
+        EntityManager em=emf.createEntityManager();
+        String query = "DELETE FROM public.mi_piace WHERE id_riferimento = ?1 AND tipo_riferimento = ?2 AND id_utente = ?3";
+        try{   
+            em.getTransaction().begin(); 
+            em.createNativeQuery(query)
+                .setParameter(1, riferimento.getId())
+                .setParameter(2, getSimpleClassName(riferimento))
                 .setParameter(3, user.getUsername())
                 .executeUpdate();
         
@@ -79,17 +96,19 @@ public class InteragibileDao{
         }
     }
 
-    public void removeLike(Interagibile inter, Utente user) {
+    public void addComment(Commento c){
         EntityManager em=emf.createEntityManager();
-        String query = "DELETE FROM public.mi_piace WHERE id_riferimento = ?1 AND tipo_riferimento = ?2 AND id_utente = ?3";
+        Interagibile riferimento = c.getInteragibile();
+        String query = "INSERT INTO commento(testo, timestamp, id_riferimento, tipo_riferimento, id_utente) VALUES (?1, ?2, ?3, ?4, ?5)";
         try{   
             em.getTransaction().begin(); 
             em.createNativeQuery(query)
-                .setParameter(1, inter.getId())
-                .setParameter(2, getSimpleClassName(inter))
-                .setParameter(3, user.getUsername())
+                .setParameter(1, c.getTesto())
+                .setParameter(2, c.getTimestamp())
+                .setParameter(3, riferimento.getId())
+                .setParameter(4, getSimpleClassName(riferimento))
+                .setParameter(5, c.getUtente().getUsername())
                 .executeUpdate();
-        
             em.getTransaction().commit();
             em.close();
         }catch(PersistenceException e){
