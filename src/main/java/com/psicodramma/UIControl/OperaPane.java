@@ -30,12 +30,17 @@ public class OperaPane extends ListCell<Opera>{
     private void loadFXML() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/psicodramma/custom/opera_pane.fxml"));
-            //loader.setController(this);
+            loader.setController(this);
             loader.load();
         }
         catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    private void initialize(){
+        pannello.setOnMouseClicked((mouseEvent) -> gotoLibro());
     }
 
     @FXML
