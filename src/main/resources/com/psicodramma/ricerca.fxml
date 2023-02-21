@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.RicercaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+            <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#gotoTimeline" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                <image>
                   <Image url="@icon/arrow.png" />
                </image>

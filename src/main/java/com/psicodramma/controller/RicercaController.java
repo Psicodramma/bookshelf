@@ -1,5 +1,8 @@
 package com.psicodramma.controller;
 
+import java.io.IOException;
+
+import com.psicodramma.App;
 import com.psicodramma.UIControl.CommentPane;
 import com.psicodramma.UIControl.OperaPane;
 import com.psicodramma.model.Commento;
@@ -48,6 +51,10 @@ public class RicercaController {
 
     @FXML
     private void gotoTimeline(){
-        System.out.println("CIAO");
+        try {
+            App.setRoot("timeline");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

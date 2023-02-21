@@ -1,5 +1,6 @@
 package com.psicodramma.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.psicodramma.model.Opera;
@@ -15,6 +16,6 @@ public class BookService {
     }
 
     public Collection<Opera> search(String text) {
-        return null;
+        return new ArrayList<>();
     }
 }
