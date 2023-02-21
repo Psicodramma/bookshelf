@@ -1,11 +1,12 @@
 package com.psicodramma.controller;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.function.BiFunction;
 
 import com.psicodramma.App;
-import com.psicodramma.UIControl.CommentPane;
 import com.psicodramma.UIControl.OperaPane;
-import com.psicodramma.model.Commento;
+import com.psicodramma.dao.OperaDao;
 import com.psicodramma.model.Interagibile;
 import com.psicodramma.model.Opera;
 import com.psicodramma.model.Utente;
@@ -32,7 +33,10 @@ public class RicercaController {
 
     public RicercaController(String text) {
         bookService = new BookService();
-        operaList.addAll(bookService.search(text));
+        BiFunction<OperaDao, String, Collection<Opera>> prova = (operaDao, testoRicerca) -> {
+            return operaDao.getOpereByAutore(testoRicerca);
+        };
+        operaList.addAll(bookService.search(prova, text));
     }
      
     @FXML
