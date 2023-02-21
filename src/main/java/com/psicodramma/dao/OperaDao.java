@@ -1,5 +1,7 @@
 package com.psicodramma.dao;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -60,4 +62,18 @@ public class OperaDao{
         }
         return op;
     }
+
+    public Collection<Opera> getOpereByTitolo(String titolo){
+        EntityManager em=emf.createEntityManager();
+        @SuppressWarnings("unchecked")
+        Collection<Opera> opere = 
+            em.createNativeQuery(
+                "Select * from Opera where titolo like ?1", Opera.class)
+            .setParameter(1, "%".concat(titolo.concat("%")))
+            .getResultList();
+        em.close();
+        return opere;
+    }
+
+
 }

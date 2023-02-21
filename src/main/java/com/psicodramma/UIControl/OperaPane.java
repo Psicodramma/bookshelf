@@ -45,7 +45,7 @@ public class OperaPane extends ListCell<Opera>{
 
     @FXML
     private void gotoLibro() {
-        System.out.println("The button was clicked!");
+        System.out.println("VAGIANGIU!");
     }
 
     @Override
