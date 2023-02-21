@@ -19,6 +19,11 @@ public class BookService {
     }
 
     public Collection<Opera> search(String text) {
-        return od.getOpereByTitolo(text);
+        Collection<Opera> oc = od.getOpereByAutore(text);
+        oc.forEach(x -> {
+            x.setAutori(od.getAutoriByOpera(x.getId()));
+            x.setGeneri(od.getGeneriByOpera(x.getId()));
+        });
+        return oc;
     }
 }
