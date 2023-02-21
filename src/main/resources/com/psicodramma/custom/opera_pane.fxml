@@ -12,7 +12,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <AnchorPane HBox.hgrow="ALWAYS">
+                  <AnchorPane prefHeight="81.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="labelTitolo" text="Label" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
                            <font>
@@ -23,29 +23,29 @@
                   </AnchorPane>
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
                            <children>
-                              <AnchorPane prefHeight="37.0" HBox.hgrow="NEVER">
+                              <AnchorPane>
                                  <children>
-                                    <Label text="Lingua Originale" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+                                    <Label text="Scritto da" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                        <font>
                                           <Font name="System Italic" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane HBox.hgrow="ALWAYS">
+                              <AnchorPane>
                                  <children>
-                                    <Label fx:id="labelLingua" text="Label" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0" />
+                                    <Label fx:id="labelAutori" layoutY="10.0" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
-                        <HBox VBox.vgrow="ALWAYS">
+                        <HBox alignment="CENTER" VBox.vgrow="NEVER">
                            <children>
-                              <AnchorPane HBox.hgrow="NEVER">
+                              <AnchorPane prefHeight="37.0" HBox.hgrow="NEVER">
                                  <children>
-                                    <Label text="Pubblicato nel " AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+                                    <Label text="Lingua Originale" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                        <font>
                                           <Font name="System Italic" size="12.0" />
                                        </font>
@@ -54,13 +54,41 @@
                               </AnchorPane>
                               <AnchorPane HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label fx:id="labelAnno" layoutY="10.0" text="Label" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                                    <Label fx:id="labelLingua" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox VBox.vgrow="NEVER">
+                           <children>
+                              <AnchorPane HBox.hgrow="NEVER">
+                                 <children>
+                                    <Label text="Pubblicato nel " AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                       <font>
+                                          <Font name="System Italic" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="labelAnno" layoutY="10.0" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                      </children>
                   </VBox>
+                  <AnchorPane prefHeight="81.0" prefWidth="260.0" HBox.hgrow="NEVER">
+                     <children>
+                        <Label text="Generi:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelGeneri" layoutY="24.0" text="Label" wrapText="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0" />
+                     </children>
+                  </AnchorPane>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

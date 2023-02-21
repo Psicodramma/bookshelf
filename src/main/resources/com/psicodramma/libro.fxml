@@ -11,27 +11,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psicodramma.controller.LibroController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="250.0" prefWidth="800.0">
                <children>
-                  <ImageView fx:id="indietroButton" onMouseClicked="#indietro" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" x="10.0" y="10.0">
-                     <image>
-                        <Image url="@icon/arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgLibro" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" x="50.0" y="50.0">
+                  <AnchorPane HBox.hgrow="NEVER">
+                     <children>
+                        <ImageView fx:id="indietroButton" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#indietro" pickOnBounds="true" preserveRatio="true" x="10.0" y="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <image>
+                              <Image url="@icon/arrow.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <ImageView fx:id="imgLibro" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" x="50.0" y="50.0" HBox.hgrow="ALWAYS">
                      <viewport>
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
-                  <VBox prefHeight="250.0" prefWidth="410.0">
+                  <VBox prefHeight="250.0" prefWidth="410.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="labelNomeOpera" prefHeight="25.0" prefWidth="300.0" text="Label">
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
                         <Label text="Autori" />
@@ -63,16 +67,25 @@
                            </font></Label>
                      </children>
                   </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <fx:include source="custom/likecommentbutton.fxml" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" HBox.hgrow="NEVER" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <TabPane prefHeight="401.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab fx:id="tabCommenti" closable="false" text="Commenti">
+                <Tab fx:id="tabEdizioni" closable="false" text="Edizioni">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
                 </Tab>
-                <Tab fx:id="tabEdizioni" closable="false" text="Edizioni">
+                <Tab fx:id="tabCommenti" text="Commenti">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>

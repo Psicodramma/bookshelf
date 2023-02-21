@@ -3,6 +3,8 @@ package com.psicodramma.UIControl;
 import java.io.IOException;
 import java.text.DateFormat;
 
+import com.psicodramma.App;
+import com.psicodramma.controller.LibroController;
 import com.psicodramma.model.Azione;
 import com.psicodramma.model.Interagibile;
 import com.psicodramma.model.Opera;
@@ -20,6 +22,8 @@ public class OperaPane extends ListCell<Opera>{
     @FXML private Label labelLingua;
     @FXML private Label labelAnno;
     @FXML private Label labelDescrizione;
+    @FXML private Label labelAutori;
+    @FXML private Label labelGeneri;
 
     private Opera opera;
 
@@ -45,7 +49,12 @@ public class OperaPane extends ListCell<Opera>{
 
     @FXML
     private void gotoLibro() {
-        System.out.println("VAGIANGIU!");
+        LibroController controller = new LibroController(opera);
+        try {
+            App.setRoot("libro", controller);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -63,6 +72,8 @@ public class OperaPane extends ListCell<Opera>{
             labelDescrizione.setText(opera.getDescrizione());
             labelLingua.setText(opera.getLingua());
             labelTitolo.setText(opera.getTitolo());
+            labelAutori.setText(String.join(", ", opera.getAutori()));
+            labelGeneri.setText(String.join(", ", opera.getGeneri()));
         }
     }
 }
