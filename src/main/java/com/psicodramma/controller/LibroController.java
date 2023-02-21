@@ -1,7 +1,9 @@
 package com.psicodramma.controller;
 
+import java.io.IOException;
 import java.util.Objects;
 
+import com.psicodramma.App;
 import com.psicodramma.dao.InteragibileDao;
 import com.psicodramma.dao.OperaDao;
 import com.psicodramma.model.Opera;
@@ -22,27 +24,30 @@ public class LibroController {
 
     private OperaDao opDao;
     private InteragibileDao intDao;
-    private Opera op;
+    private Opera opera;
+
     public LibroController() {
         opDao = new OperaDao();
+    }
+
+    public LibroController(Opera opera){
+        opDao = new OperaDao();
+        this.opera = opera;
     }
     
     @FXML
     private void initialize() { 
-        //idOpera = (String) App.getData(); 
-        int idOpera = 1;
-        op = opDao.getOperaById(idOpera);
-        if(!Objects.isNull(op)){
-            labelNomeOpera.setText(op.getTitolo());
-            labelAnno.setText(String.valueOf(op.getAnno()));
-            labelDescrizione.setText(op.getDescrizione());
-            labelLingua.setText(op.getLingua());
-            labelAutori.setText(String.join(", ", op.getAutori()));
-            labelGeneri.setText(String.join(", ", op.getGeneri()));
+        if(!Objects.isNull(opera)){
+            labelNomeOpera.setText(opera.getTitolo());
+            labelAnno.setText(String.valueOf(opera.getAnno()));
+            labelDescrizione.setText(opera.getDescrizione());
+            labelLingua.setText(opera.getLingua());
+            labelAutori.setText(String.join(", ", opera.getAutori()));
+            labelGeneri.setText(String.join(", ", opera.getGeneri()));
 
             intDao = new InteragibileDao();
-            intDao.setInteragibile(op);
-            op.getEdizioni().forEach(x -> intDao.setInteragibile(x));
+            intDao.setInteragibile(opera);
+            opera.getEdizioni().forEach(x -> intDao.setInteragibile(x));
         }else{
             labelNomeOpera.setText("Opera non presente");
         }
@@ -50,8 +55,10 @@ public class LibroController {
 
     @FXML
     private void indietro(){
-        System.out.println("Prova");
+        try {
+            App.setRoot("timeline");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-    
 }

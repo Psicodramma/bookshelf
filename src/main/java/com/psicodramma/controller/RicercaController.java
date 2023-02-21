@@ -31,11 +31,8 @@ public class RicercaController {
         bookService = new BookService();
     }
 
-    public RicercaController(String text) {
+    public RicercaController(String text, BiFunction<OperaDao, String, Collection<Opera>> prova) {
         bookService = new BookService();
-        BiFunction<OperaDao, String, Collection<Opera>> prova = (operaDao, testoRicerca) -> {
-            return operaDao.getOpereByAutore(testoRicerca);
-        };
         operaList.addAll(bookService.search(prova, text));
     }
      
