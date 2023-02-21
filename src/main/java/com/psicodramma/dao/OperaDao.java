@@ -68,7 +68,7 @@ public class OperaDao{
         @SuppressWarnings("unchecked")
         Collection<Opera> opere = 
             em.createNativeQuery(
-                "Select * from opera where unaccent(LOWER(titolo)) like unaccent(LOWER(?1))", Opera.class)
+                "Select * from opere_preferite where unaccent(LOWER(titolo)) like unaccent(LOWER(?1))", Opera.class)
             .setParameter(1, "%".concat(titolo.concat("%")))
             .getResultList();
         em.close();
@@ -79,7 +79,7 @@ public class OperaDao{
         EntityManager em=emf.createEntityManager();
         @SuppressWarnings("unchecked")
         Collection<Opera> opere = 
-            em.createNativeQuery("Select o.* from opera o join genere_opera go on o.id = go.id_opera join genere g on go.id_genere = g.id where LOWER(g.nome) like LOWER(?1)", Opera.class)
+            em.createNativeQuery("Select o.* from opere_preferite o join genere_opera go on o.id = go.id_opera join genere g on go.id_genere = g.id where LOWER(g.nome) like LOWER(?1)", Opera.class)
             .setParameter(1, genere.concat("%"))
             .getResultList();
         em.close();
@@ -89,7 +89,7 @@ public class OperaDao{
     public Collection<Opera> getOpereByAutore(String autore){
         EntityManager em=emf.createEntityManager();
         // concat_ws(?1, nome, cognome)
-        String sql = "Select o.* from opera o join autore_opera ao on o.id = ao.id_opera join autore a on ao.id_autore = a.id where unaccent(LOWER(concat_ws(?1, nome, cognome))) like unaccent(LOWER(?2))";
+        String sql = "Select o.* from opere_preferite o join autore_opera ao on o.id = ao.id_opera join autore a on ao.id_autore = a.id where unaccent(LOWER(concat_ws(?1, nome, cognome))) like unaccent(LOWER(?2))";
         @SuppressWarnings("unchecked")
         Collection<Opera> opere = 
             em.createNativeQuery(sql, Opera.class)
