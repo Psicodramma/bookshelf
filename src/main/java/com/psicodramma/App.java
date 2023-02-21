@@ -29,6 +29,17 @@ public class App extends Application{
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        fxmlLoader.setController(fxmlLoader);
+        return fxmlLoader.load();
+    }
+
+    public static void setRoot(String fxml, Object controller) throws IOException {
+        scene.setRoot(loadFXML(fxml, controller));
+    }
+
+    private static Parent loadFXML(String fxml, Object controller) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        fxmlLoader.setController(controller);
         return fxmlLoader.load();
     }
 

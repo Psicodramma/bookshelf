@@ -1,5 +1,6 @@
 package com.psicodramma.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,13 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 public class TimelineController {
-    @FXML protected ListView<Azione> actionViewList;
-    @FXML protected BarChart<String, Long> actionWeekChart;
+    @FXML private ListView<Azione> actionViewList;
+    @FXML private BarChart<String, Long> actionWeekChart;
+    @FXML private TextField searchBox;     
+
     private ObservableList<Azione> actionList = FXCollections.observableArrayList();
     private TimelineService timelineService;
     private Utente utente;
@@ -44,6 +48,16 @@ public class TimelineController {
             System.out.println("action list is empty");
         }
         setupActionWeek();
+    }
+
+    @FXML 
+    private void gotoRicerca(){
+        RicercaController ricercaController = new RicercaController(searchBox.getText());
+        try {
+            App.setRoot("ricerca", ricercaController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupListView() {
