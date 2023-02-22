@@ -20,10 +20,10 @@ public class OperaDaoTest {
     private static Opera test;
     private static Set<String> autori, generi;
     @BeforeAll
-    public static void initAccessService(){
+    public static void initOperaDao(){
         od = new OperaDao("test");
-        autori = Set.of("autore test", "test test");
-        generi = Set.of("romanzo", "test");
+        autori = Set.of("nome cognome", "nome1 cognome1");
+        generi = Set.of("genere1", "genere2");
         test = new Opera(1, "test", "Opera di test", "test", autori, generi, 0, null);
         EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
         em.getTransaction().begin();
@@ -65,14 +65,10 @@ public class OperaDaoTest {
     }
 
     @AfterAll
-    public static void deleteUser(){
+    public static void deleteAll(){
         EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
         em.getTransaction().begin();
-        em.createNativeQuery("Delete from autore_opera").executeUpdate();
-        em.createNativeQuery("Delete from genere_opera").executeUpdate();
-        em.createNativeQuery("Delete from genere").executeUpdate();
-        em.createNativeQuery("Delete from opera").executeUpdate();
-        em.createNativeQuery("Delete from autore").executeUpdate();
+        em.createNativeQuery("Truncate autore, autore_opera, azione, commento, edizione, edizione_raccolta, genere, genere_opera, mi_piace, opera, raccolta, segue, utente").executeUpdate();
         em.getTransaction().commit();
         em.close();
     }

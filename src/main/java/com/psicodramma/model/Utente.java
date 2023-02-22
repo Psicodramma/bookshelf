@@ -20,6 +20,10 @@ public class Utente {
 
     public Utente(){ }
 
+    public Utente(String username) {
+        this.username = username;
+    }
+
     public Utente(String username, String nazionalita, String password) {
         this.username = username;
         this.nazionalita = nazionalita;

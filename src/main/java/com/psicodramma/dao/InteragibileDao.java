@@ -20,6 +20,10 @@ public class InteragibileDao{
         emf = Persistence.createEntityManagerFactory("default");
     }
 
+    public InteragibileDao(String persistenceUnit){
+        emf = Persistence.createEntityManagerFactory(persistenceUnit);
+    }
+
     private String getSimpleClassName(Object o){
         return o.getClass().getSimpleName().toLowerCase();
     }

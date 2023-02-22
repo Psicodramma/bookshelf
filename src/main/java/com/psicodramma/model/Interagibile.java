@@ -34,4 +34,27 @@ public abstract class Interagibile {
     public void setCommenti(Set<Commento> commenti) {
         this.commenti = commenti;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + String.valueOf(getId()).hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        if (getId() != (getClass().cast(obj)).getId())
+            return false;
+        return true;
+    }
+
+    
 }

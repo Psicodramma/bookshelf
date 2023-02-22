@@ -52,10 +52,10 @@ public class AccessServiceTest {
     }
 
     @AfterAll
-    public static void deleteUser(){
+    public static void deleteAll(){
         EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
         em.getTransaction().begin();
-        em.createNativeQuery("Delete from utente").executeUpdate();
+        em.createNativeQuery("Truncate autore, autore_opera, azione, commento, edizione, edizione_raccolta, genere, genere_opera, mi_piace, opera, raccolta, segue, utente");
         em.getTransaction().commit();
         em.close();
     }
