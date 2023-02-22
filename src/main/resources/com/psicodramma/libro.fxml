@@ -71,7 +71,7 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <fx:include source="custom/likecommentbutton.fxml" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" HBox.hgrow="NEVER" />
+                              <fx:include fx:id="likes" source="custom/likecommentbutton.fxml" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" HBox.hgrow="NEVER" />
                            </children>
                         </AnchorPane>
                      </children>

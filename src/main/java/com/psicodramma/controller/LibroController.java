@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 import com.psicodramma.App;
+import com.psicodramma.UIControl.LikeCommentButton;
 import com.psicodramma.dao.InteragibileDao;
 import com.psicodramma.dao.OperaDao;
 import com.psicodramma.model.Opera;
+import com.psicodramma.service.BookService;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -21,18 +23,19 @@ public class LibroController {
     @FXML protected Label labelDescrizione;
     @FXML protected Label labelLingua;
     @FXML protected Label labelGeneri;
+    @FXML private LikeCommentButton likesController;
 
-    private OperaDao opDao;
-    private InteragibileDao intDao;
+    //CAMBIA
+    private BookService bookService;
     private Opera opera;
 
     public LibroController() {
-        opDao = new OperaDao();
+        bookService = new BookService();
     }
 
     public LibroController(Opera opera){
-        opDao = new OperaDao();
         this.opera = opera;
+        bookService = new BookService();
     }
     
     @FXML
@@ -45,9 +48,7 @@ public class LibroController {
             labelAutori.setText(String.join(", ", opera.getAutori()));
             labelGeneri.setText(String.join(", ", opera.getGeneri()));
 
-            intDao = new InteragibileDao();
-            intDao.setInteragibile(opera);
-            opera.getEdizioni().forEach(x -> intDao.setInteragibile(x));
+            likesController.setInteragibile(opera);
         }else{
             labelNomeOpera.setText("Opera non presente");
         }

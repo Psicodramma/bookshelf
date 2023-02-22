@@ -53,15 +53,7 @@ public class CommentTab extends AnchorPane{
         Set<Commento> commenti = interactionService.getComment(interagibile);
         interagibile.setCommenti(commenti);
         commentList.addAll(commenti);
-        checkList();
-    }
-
-    private void checkList() {
-        if (!commentList.isEmpty()) {
-            setupListView();
-        } else {
-            System.out.println("comment list is empty");
-        }
+        setupListView();
     }
 
     private void setupListView() {
@@ -73,5 +65,6 @@ public class CommentTab extends AnchorPane{
     private void sendCommento() {
         String testoCommento = textboxCommento.getText();
         commentList.add(interactionService.addComment(interagibile, utente, testoCommento));
+        setupListView();
     }
 }

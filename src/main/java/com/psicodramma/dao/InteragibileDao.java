@@ -102,13 +102,13 @@ public class InteragibileDao{
         String query = "INSERT INTO commento(testo, timestamp, id_riferimento, tipo_riferimento, id_utente) VALUES (?1, ?2, ?3, ?4, ?5)";
         try{   
             em.getTransaction().begin(); 
-            em.createNativeQuery(query)
+            c.setId(em.createNativeQuery(query)
                 .setParameter(1, c.getTesto())
                 .setParameter(2, c.getTimestamp())
                 .setParameter(3, riferimento.getId())
                 .setParameter(4, getSimpleClassName(riferimento))
                 .setParameter(5, c.getUtente().getUsername())
-                .executeUpdate();
+                .getFirstResult());
             em.getTransaction().commit();
             em.close();
         }catch(PersistenceException e){
