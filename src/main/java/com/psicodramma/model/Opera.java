@@ -37,6 +37,17 @@ public class Opera extends Interagibile{
         this.anno = anno;
         this.edizioni = edizioni;
     }
+    public Opera(String titolo, String descrizione, String lingua, Set<String> autori, Set<String> generi, int anno,
+    Set<Edizione> edizioni) {
+                this.titolo = titolo;
+        this.descrizione = descrizione;
+        this.lingua = lingua;
+        this.autori = autori;
+        this.generi = generi;
+        this.anno = anno;
+        this.edizioni = edizioni;
+    }
+
     public String getDescrizione() {
         return descrizione;
     }

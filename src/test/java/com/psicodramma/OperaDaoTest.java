@@ -68,7 +68,7 @@ public class OperaDaoTest {
     public static void deleteAll(){
         EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
         em.getTransaction().begin();
-        em.createNativeQuery("Truncate autore, autore_opera, azione, commento, edizione, edizione_raccolta, genere, genere_opera, mi_piace, opera, raccolta, segue, utente").executeUpdate();
+        em.createNativeQuery("Truncate autore, autore_opera, genere, genere_opera, opera restart IDENTITY cascade").executeUpdate();
         em.getTransaction().commit();
         em.close();
     }

@@ -48,7 +48,7 @@ public class InteragibileDaoTest {
     @Test
     public void addCommentoNested(){
         Commento c = new Commento(testUtente, "test", new Date(), testOpera);
-        c.setId(1);
+        c.setId(0);
         c.setCommenti(Set.of());
         Commento c2 = new Commento(testUtente, "test", new Date(), c);
         intDao.addComment(c2);
@@ -77,7 +77,7 @@ public class InteragibileDaoTest {
     public static void deleteAll(){
         EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
         em.getTransaction().begin();
-        em.createNativeQuery("Truncate autore, autore_opera, azione, commento, edizione, edizione_raccolta, genere, genere_opera, mi_piace, opera, raccolta, segue, utente").executeUpdate();
+        em.createNativeQuery("Truncate commento, mi_piace, opera, utente restart IDENTITY cascade").executeUpdate();
         em.getTransaction().commit();
         em.close();
     }
