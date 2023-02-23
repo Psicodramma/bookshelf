@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="283.0" prefWidth="800.0" VBox.vgrow="SOMETIMES">
+               <children>
+                  <AnchorPane HBox.hgrow="NEVER">
+                     <children>
+                        <ImageView fx:id="indietroButton" fitHeight="32.0" fitWidth="32.0" onMouseClicked="#indietro" pickOnBounds="true" preserveRatio="true" x="10.0" y="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <image>
+                              <Image url="@icon/arrow.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="384.0" prefWidth="250.0" HBox.hgrow="NEVER">
+                     <children>
+                        <ImageView fx:id="imgEdizione" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" x="50.0" y="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="283.0" prefWidth="349.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="250.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
+                           <children>
+                              <Label fx:id="labelNomeOpera" prefHeight="25.0" prefWidth="300.0" text="Label">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Autori" />
+                              <Label fx:id="labelAutori" prefHeight="17.0" prefWidth="313.0" wrapText="true">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Anno Pubblicazione" />
+                              <Label fx:id="labelAnno" prefHeight="17.0" prefWidth="107.0">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Lingua Originale" />
+                              <Label fx:id="labelLinguaOriginale" prefHeight="17.0" prefWidth="123.0">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Generi" />
+                              <Label fx:id="labelGeneri" prefHeight="17.0" prefWidth="313.0" wrapText="true">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Descrizione" />
+                              <Label fx:id="labelDescrizione" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="NEVER">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="readButton" layoutX="-32.0" mnemonicParsing="false" onMouseClicked="#setAsLetto" prefHeight="62.0" prefWidth="87.0" text="Letto" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="-32.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="stateButton" mnemonicParsing="false" onMouseClicked="#modificaStato" text="Modifica Stato" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <fx:include fx:id="likes" source="custom/likecommentbutton.fxml" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" HBox.hgrow="NEVER" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <AnchorPane>
+                           <children>
+                              <Label alignment="CENTER" text="Edito da" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label fx:id="labelEditore" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label alignment="CENTER" text="Edizione Pubblicata Nel" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label fx:id="labelPaese" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label alignment="CENTER" text="Pubblicato in" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label fx:id="labelLingua" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <AnchorPane>
+                           <children>
+                              <Label alignment="CENTER" text="N. Pagine" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label fx:id="labelPagine" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label alignment="CENTER" text="Lingua" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label fx:id="labelLinguaEdizione" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label alignment="CENTER" text="ISBN" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font name="System Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label fx:id="labelISBN" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -3,7 +3,12 @@ package com.psicodramma.UIControl;
 import java.io.IOException;
 import java.text.DateFormat;
 
+import com.psicodramma.App;
+import com.psicodramma.controller.EdizioneController;
+import com.psicodramma.controller.LibreriaController;
+import com.psicodramma.controller.LibroController;
 import com.psicodramma.model.Azione;
+import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Interagibile;
 
 import javafx.fxml.FXML;
@@ -20,7 +25,7 @@ public class ActionPane extends ListCell<Azione>{
     @FXML private Label labelTimestamp;
     @FXML private LikeCommentButton likesController;
 
-    private Interagibile interagibile;
+    private Azione azione;
 
     public ActionPane() {
         loadFXML();
@@ -45,12 +50,22 @@ public class ActionPane extends ListCell<Azione>{
 
     @FXML
     private void gotoRaccoltaUtente() {
-        System.out.println("The button was clicked!");
+        LibreriaController controller = new LibreriaController(azione.getUtente());
+        try {
+            App.setRoot("libreria", controller);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void gotoLibro() {
-        System.out.println("The button was clicked!");
+        EdizioneController controller = new EdizioneController(azione.getEdizione());
+        try {
+            App.setRoot("edizione", controller);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -61,7 +76,7 @@ public class ActionPane extends ListCell<Azione>{
             setText(null);
             setGraphic(null);
         } else {
-            interagibile = item;
+            azione = item;
             setGraphic(pannello);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             likesController.setInteragibile(item);

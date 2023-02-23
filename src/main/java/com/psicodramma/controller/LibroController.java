@@ -1,17 +1,21 @@
 package com.psicodramma.controller;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Objects;
 
 import com.psicodramma.App;
+import com.psicodramma.UIControl.EditionPane;
 import com.psicodramma.UIControl.LikeCommentButton;
-import com.psicodramma.dao.InteragibileDao;
-import com.psicodramma.dao.OperaDao;
+import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Opera;
 import com.psicodramma.service.BookService;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
 public class LibroController {
@@ -24,8 +28,10 @@ public class LibroController {
     @FXML protected Label labelLingua;
     @FXML protected Label labelGeneri;
     @FXML private LikeCommentButton likesController;
+    @FXML private ListView<Edizione> edizioniList;
+    
+    private ObservableList<Edizione> editionList = FXCollections.observableArrayList();
 
-    //CAMBIA
     private BookService bookService;
     private Opera opera;
 
@@ -36,11 +42,17 @@ public class LibroController {
     public LibroController(Opera opera){
         this.opera = opera;
         bookService = new BookService();
+        // FORSE DA LEVARE
+        Collection<Edizione> res = opera.getEdizioni();
+        editionList.setAll(res);
     }
     
     @FXML
     private void initialize() { 
         if(!Objects.isNull(opera)){
+            edizioniList.setItems(editionList);
+            edizioniList.setCellFactory((param) -> new EditionPane());
+
             labelNomeOpera.setText(opera.getTitolo());
             labelAnno.setText(String.valueOf(opera.getAnno()));
             labelDescrizione.setText(opera.getDescrizione());

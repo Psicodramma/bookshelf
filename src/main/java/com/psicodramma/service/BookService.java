@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.function.BiFunction;
 
 import com.psicodramma.dao.OperaDao;
+import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Opera;
 
 import jakarta.persistence.EntityManagerFactory;
@@ -26,6 +27,10 @@ public class BookService {
             x.setGeneri(od.getGeneriByOpera(x.getId()));
         });
         return oc;
+    }
+
+    public Collection<Edizione> getEditionList() {
+        return null;
     }
     
 }

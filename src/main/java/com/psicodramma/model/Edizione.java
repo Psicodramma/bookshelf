@@ -15,6 +15,8 @@ public class Edizione extends Interagibile{
     private String lingua;
     @Column(name="paese_pubblicazione")
     private String paese;
+    private String url;
+    private String descrizione;
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "id_opera")
     private Opera opera;
@@ -36,6 +38,19 @@ public class Edizione extends Interagibile{
     }
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+    
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    public String getDescrizione() {
+        return descrizione;
+    }
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
     public String getEditore() {
         return editore;
