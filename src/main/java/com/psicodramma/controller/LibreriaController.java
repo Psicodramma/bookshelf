@@ -6,11 +6,8 @@ import java.util.Objects;
 
 import com.psicodramma.App;
 import com.psicodramma.UIControl.EditionPane;
-import com.psicodramma.UIControl.LikeCommentButton;
 import com.psicodramma.model.Edizione;
-import com.psicodramma.model.Opera;
 import com.psicodramma.model.Utente;
-import com.psicodramma.service.BookService;
 import com.psicodramma.service.LibraryService;
 
 import javafx.collections.FXCollections;
@@ -76,6 +73,12 @@ public class LibreriaController {
             if(utente.equals(App.getData())){
                 followButton.setVisible(false);
             }
+
+            labelUtente.setText(utente.getUsername());
+            labelDaLeggere.setText("Da Leggere");
+            labelLetti.setText("Letti");
+            labelAccantonati.setText("Accantonati");
+            labelLettura.setText("Lettura");
         }
     }
 

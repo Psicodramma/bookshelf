@@ -72,8 +72,8 @@ public class OperaPane extends ListCell<Opera>{
             labelDescrizione.setText(opera.getDescrizione());
             labelLingua.setText(opera.getLingua());
             labelTitolo.setText(opera.getTitolo());
-            labelAutori.setText(String.join(", ", opera.getAutori()));
-            labelGeneri.setText(String.join(", ", opera.getGeneri()));
+            labelAutori.setText(opera.getAutoriToString());
+            labelGeneri.setText(opera.getGeneriToString());
         }
     }
 }

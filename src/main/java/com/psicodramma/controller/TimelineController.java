@@ -10,8 +10,10 @@ import java.util.stream.Stream;
 
 import com.psicodramma.App;
 import com.psicodramma.UIControl.ActionPane;
+import com.psicodramma.UIControl.EditionPane;
 import com.psicodramma.dao.OperaDao;
 import com.psicodramma.model.Azione;
+import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Opera;
 import com.psicodramma.model.Utente;
 import com.psicodramma.service.TimelineService;
@@ -33,9 +35,11 @@ public class TimelineController {
     @FXML private ListView<Azione> actionViewList;
     @FXML private BarChart<String, Long> actionWeekChart;
     @FXML private TextField searchBox;  
-    @FXML private VBox vb;       
+    @FXML private VBox vb;    
+    @FXML private ListView<Edizione> recommendations;    
 
     private ObservableList<Azione> actionList = FXCollections.observableArrayList();
+    private ObservableList<Edizione> raccomandati = FXCollections.observableArrayList();
     private ToggleGroup group = new ToggleGroup();
     private TimelineService timelineService;
     private Utente utente;
@@ -47,7 +51,8 @@ public class TimelineController {
         List<Azione> res = timelineService.getActionList();
         actionList.setAll(res);
         azioniGiorno = timelineService.getAzioniGiorno(utente);
-        
+        List<Edizione> racc = timelineService.getRaccomandati(utente);
+        raccomandati.setAll(racc);
     }
 
     private void setRadioButton(){
@@ -102,6 +107,9 @@ public class TimelineController {
     private void setupListView() {
         actionViewList.setItems(actionList);
         actionViewList.setCellFactory((param) -> new ActionPane());
+
+        recommendations.setItems(raccomandati);
+        recommendations.setCellFactory((param) -> new EditionPane());
     }
 
     private void setupActionWeek(){

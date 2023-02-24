@@ -22,10 +22,10 @@ public class BookService {
     public Collection<Opera> search(BiFunction<OperaDao, String, Collection<Opera>> searchStrategy, String testo) {
         
         Collection<Opera> oc = searchStrategy.apply(od, testo);
-        oc.forEach(x -> {
-            x.setAutori(od.getAutoriByOpera(x.getId()));
-            x.setGeneri(od.getGeneriByOpera(x.getId()));
-        });
+        //oc.forEach(x -> {
+        //    x.setAutori(od.getAutoriByOpera(x.getId()));
+        //    x.setGeneri(od.getGeneriByOpera(x.getId()));
+        //});
         return oc;
     }
 
