@@ -112,8 +112,8 @@ public class Raccolta {
         return true;
     }
 
-    
-
-    
-    
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

@@ -81,7 +81,7 @@
                         </BarChart>
                      </children>
                   </AnchorPane>
-                  <VBox>
+                  <VBox VBox.vgrow="ALWAYS">
                      <children>
                         <AnchorPane VBox.vgrow="NEVER">
                            <children>
@@ -92,7 +92,11 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <ListView fx:id="recommendations" orientation="HORIZONTAL" prefHeight="250.0" prefWidth="400.0" />
+                        <AnchorPane VBox.vgrow="ALWAYS">
+                           <children>
+                              <ListView fx:id="recommendations" orientation="HORIZONTAL" prefHeight="250.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </VBox>
                </children>

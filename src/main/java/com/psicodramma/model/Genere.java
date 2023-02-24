@@ -61,6 +61,6 @@ public class Genere {
 
     @Override
     public String toString() {
-        return id + " " + nome;
+        return nome;
     }
 }

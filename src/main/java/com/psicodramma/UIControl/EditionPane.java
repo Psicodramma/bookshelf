@@ -6,16 +6,28 @@ import java.text.DateFormat;
 import com.psicodramma.App;
 import com.psicodramma.controller.EdizioneController;
 import com.psicodramma.model.Edizione;
+import com.psicodramma.model.Raccolta;
+import com.psicodramma.model.Utente;
 import com.psicodramma.service.LibraryService;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class EditionPane extends ListCell<Edizione>{
     @FXML private AnchorPane pannello;
@@ -64,21 +76,33 @@ public class EditionPane extends ListCell<Edizione>{
 
     @FXML
     private void setAsToRead() {
-        System.out.println("da leggere :"+edizione.getEditore());
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Delete ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            
+        }
         readButton.setOnMouseClicked((mouseEvent) -> removeToRead());
-        readButton.setText("rimuovi da leggere");
     }
 
     @FXML
     private void removeToRead() {
-        System.out.println("non più da leggere :"+edizione.getEditore());
-        readButton.setOnMouseClicked((mouseEvent) -> removeToRead());
-        readButton.setText("da leggere");
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Delete ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            
+        }
+        readButton.setOnMouseClicked((mouseEvent) -> setAsToRead());
     }
 
     @FXML
     private void modifyState() {
+        Utente u = (Utente) App.getData();
+        DialogAggiungi dia = new DialogAggiungi(u);
         
+        dia.showAndWait();
+
     }
 
     @Override

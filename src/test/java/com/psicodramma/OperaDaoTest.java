@@ -55,19 +55,19 @@ public class OperaDaoTest {
         assertTrue(test.equals(o));
     }
 
-    //@Test
-    //public void getAutoriTest(){
-    //    Set<String> autori = od.getAutoriByOpera(1);
-    //    Set<String> autoriTest = test.getAutori();
-    //    assertTrue(autoriTest.containsAll(autori) && autori.containsAll(autoriTest));
-    //}
+    @Test
+    public void getAutoriTest(){
+        Set<Autore> autori =  od.getOperaById(1).getAutori();
+        Set<Autore> autoriTest = test.getAutori();
+        assertTrue(autoriTest.containsAll(autori) && autori.containsAll(autoriTest));
+    }
 
-    //@Test
-    //public void getGeneriTest(){
-    //    Set<String> generi = od.getGeneriByOpera(1);
-    //    Set<String> generiTest = test.getGeneri();
-    //    assertTrue(generiTest.containsAll(generi) && generi.containsAll(generiTest));
-    //}
+    @Test
+    public void getGeneriTest(){
+        Set<Genere> generi = od.getOperaById(1).getGeneri();
+        Set<Genere> generiTest = test.getGeneri();
+        assertTrue(generiTest.containsAll(generi) && generi.containsAll(generiTest));
+    }
 
     @AfterAll
     public static void deleteAll(){

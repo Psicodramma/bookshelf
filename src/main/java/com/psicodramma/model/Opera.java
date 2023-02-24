@@ -1,5 +1,6 @@
 package com.psicodramma.model;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -111,19 +112,13 @@ public class Opera extends Interagibile{
     }
 
     public String getGeneriToString(){
-        String sGeneri = "";
-        for(Genere g : generi){
-            sGeneri = String.join(", ", g.getNome(), sGeneri);
-        }
-        return sGeneri;
+        return generi.stream().map(Genere::getNome)
+                    .collect(Collectors.joining(", "));
     }
 
     public String getAutoriToString(){
-        String sAutori = "";
-        for(Autore a : autori){
-            sAutori = String.join(", ", a.toString(), sAutori);
-        }
-        return sAutori;
+        return autori.stream().map(Autore::toString)
+                    .collect(Collectors.joining(", "));
     }
 
 }

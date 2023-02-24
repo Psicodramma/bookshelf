@@ -11,8 +11,8 @@ import com.psicodramma.model.Utente;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import javafx.collections.ObservableList;
 
+@SuppressWarnings("unchecked")
 public class TimelineService {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("default"); 
@@ -28,7 +28,7 @@ public class TimelineService {
         AzioneDao ad = new AzioneDao();
         return ad.getAzioniGiorno(u.getUsername());
     }
-
+    
     public List<Edizione> getRaccomandati(Utente utente) {
         EntityManager em = emf.createEntityManager();
         List<Edizione> res = em.createNativeQuery(String.join("\n"
@@ -40,11 +40,11 @@ public class TimelineService {
         , "from genere_opera gop join Opera o on o.id = gop.id_opera join edizione e on e.id_opera = o.id"
         , "join mi_piace mp on (mp.tipo_riferimento = 'edizione' or mp.tipo_riferimento = 'opera') and mp.id_utente = ?1) ogp"
         , "on ogp.operepiaciute = o.id"
-        , "join (select gop.id_opera as operepiaciute, gop.id_genere as generepiaciute"
+        , "join (select gop.id_opera as operelette, gop.id_genere as generelette"
         , "from genere_opera gop join Opera o on o.id = gop.id_opera join edizione e on e.id_opera = o.id"
         , "join edizione_raccolta er ON er.id_edizione = e.id and er.id_utente = ?1 where er.nome_raccolta = 'LETTI') ogp2"
-        , "on ogp.operepiaciute = o.id"
-        , "where e.id not in (select id_edizione from edizione_raccolta where id_utente = ?1) and (og.id_genere = ogp.generepiaciute or og.id_genere = ogp2.generepiaciute)"
+        , "on ogp2.operelette = o.id"
+        , "where e.id not in (select id_edizione from edizione_raccolta where id_utente = ?1) and (og.id_genere = ogp.generepiaciute or og.id_genere = ogp2.generelette)"
         ), Edizione.class).setParameter(1, utente.getUsername()).getResultList();
 
         if(res.size() < 5){
