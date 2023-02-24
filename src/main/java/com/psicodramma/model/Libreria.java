@@ -1,43 +1,32 @@
 package com.psicodramma.model;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
+@Embeddable
 public class Libreria {
-    private Raccolta letti;
-    private Raccolta daLeggere;
-    private Raccolta inLettura;
-    private Raccolta accantonati;
-    private Set<Raccolta> raccoltePersonali;
+
+    @OneToMany(
+        mappedBy = "proprietario",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Raccolta> raccoltePersonali;
+
+    @Transient
     private Utente proprietario;
 
-    public Raccolta getLetti() {
-        return letti;
+    public Libreria(){
+        raccoltePersonali = new ArrayList<>();
     }
-    public void setLetti(Raccolta letti) {
-        this.letti = letti;
-    }
-    public Raccolta getDaLeggere() {
-        return daLeggere;
-    }
-    public void setDaLeggere(Raccolta daLeggere) {
-        this.daLeggere = daLeggere;
-    }
-    public Raccolta getInLettura() {
-        return inLettura;
-    }
-    public void setInLettura(Raccolta inLettura) {
-        this.inLettura = inLettura;
-    }
-    public Raccolta getAccantonati() {
-        return accantonati;
-    }
-    public void setAccantonati(Raccolta accantonati) {
-        this.accantonati = accantonati;
-    }
-    public Set<Raccolta> getRaccoltePersonali() {
+    public List<Raccolta> getRaccoltePersonali() {
         return raccoltePersonali;
     }
-    public void setRaccoltePersonali(Set<Raccolta> raccoltePersonali) {
+    public void setRaccoltePersonali(List<Raccolta> raccoltePersonali) {
         this.raccoltePersonali = raccoltePersonali;
     }
     public Utente getProprietario() {
@@ -45,6 +34,10 @@ public class Libreria {
     }
     public void setProprietario(Utente proprietario) {
         this.proprietario = proprietario;
+    }
+
+    public void addRaccolta(Raccolta r){
+        raccoltePersonali.add(r);
     }
     @Override
     public int hashCode() {

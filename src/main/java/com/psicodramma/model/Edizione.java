@@ -1,8 +1,14 @@
 package com.psicodramma.model;
 
 import java.sql.Date;
+import java.util.Set;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Edizione extends Interagibile{
@@ -20,7 +26,7 @@ public class Edizione extends Interagibile{
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "id_opera")
     private Opera opera;
-
+    
     public Date getDataPubblicazione() {
         return dataPubblicazione;
     }
@@ -75,5 +81,7 @@ public class Edizione extends Interagibile{
     }
     public void setOpera(Opera opera) {
         this.opera = opera;
-    }    
+    }  
+
+
 }

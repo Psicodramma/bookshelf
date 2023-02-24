@@ -1,13 +1,40 @@
 package com.psicodramma.model;
 
-import java.util.Set;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Table
+@Entity(name = "raccolta")
 public class Raccolta {
+    @Id
     private String nome;
-    private String descrizione;
-    private Set<Edizione> edizioni;
-    private Libreria libreria;
     
+    private String descrizione;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "id_utente")
+    private Utente proprietario;
+
+    public Raccolta(){
+
+    }
+
+    public Raccolta(String nome, String descrizione, Utente proprietario) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.proprietario = proprietario;
+    }
+
+    public Raccolta(String nome, Utente proprietario) {
+        this.nome = nome;
+        this.proprietario = proprietario;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -20,17 +47,9 @@ public class Raccolta {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-    public Set<Edizione> getEdizioni() {
-        return edizioni;
-    }
-    public void setEdizioni(Set<Edizione> edizioni) {
-        this.edizioni = edizioni;
-    }
-    public Libreria getLibreria() {
-        return libreria;
-    }
-    public void setLibreria(Libreria libreria) {
-        this.libreria = libreria;
+    
+    public Utente getProprietario(){
+        return proprietario;
     }
     
     @Override
@@ -38,7 +57,7 @@ public class Raccolta {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        result = prime * result + ((libreria == null) ? 0 : libreria.hashCode());
+        result = prime * result + ((proprietario == null) ? 0 : proprietario.hashCode());
         return result;
     }
     @Override
@@ -55,13 +74,16 @@ public class Raccolta {
                 return false;
         } else if (!nome.equals(other.nome))
             return false;
-        if (libreria == null) {
-            if (other.libreria != null)
+        if (proprietario == null) {
+            if (other.proprietario != null)
                 return false;
-        } else if (!libreria.equals(other.libreria))
+        } else if (!proprietario.equals(other.proprietario))
             return false;
         return true;
     }
+
+    
+
     
     
 }

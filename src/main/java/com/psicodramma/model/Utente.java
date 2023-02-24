@@ -3,7 +3,7 @@ package com.psicodramma.model;
 import java.util.Set;
 import jakarta.persistence.*;
 
-@Entity(name="utente")
+@Entity
 @Table(name="utente")
 public class Utente {
     @Id
@@ -13,7 +13,7 @@ public class Utente {
     @Basic(fetch = FetchType.LAZY)
     private String nazionalita;
 
-    @Transient
+    @Embedded
     private Libreria libreria;
     @Transient 
     private Set<Utente> amici;

@@ -3,12 +3,13 @@ package com.psicodramma.controller;
 import java.io.IOException;
 import java.util.Objects;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-
 import com.psicodramma.App;
 import com.psicodramma.UIControl.ToastController;
 import com.psicodramma.service.AccessService;
+import com.psicodramma.service.LibraryService;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 public class AccessController {
     @FXML protected TextField usernameTextbox;
@@ -17,9 +18,11 @@ public class AccessController {
     
     private Object sharedData;
     private AccessService accessService;
+    private LibraryService libraryService;
 
     public AccessController(){
         accessService = new AccessService();
+        libraryService = new LibraryService();
     }
 
     @FXML
@@ -70,7 +73,6 @@ public class AccessController {
             ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Campi Obbligatori");
         }else{
             boolean success = accessService.register(usernameTextbox.getText(), passwordTextbox.getText(), nationalityTextbox.getText());
-
             if(success){
                 ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
             } else {

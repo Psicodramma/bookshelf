@@ -64,7 +64,16 @@ public class EditionPane extends ListCell<Edizione>{
 
     @FXML
     private void setAsToRead() {
-        
+        System.out.println("da leggere :"+edizione.getEditore());
+        readButton.setOnMouseClicked((mouseEvent) -> removeToRead());
+        readButton.setText("rimuovi da leggere");
+    }
+
+    @FXML
+    private void removeToRead() {
+        System.out.println("non più da leggere :"+edizione.getEditore());
+        readButton.setOnMouseClicked((mouseEvent) -> removeToRead());
+        readButton.setText("da leggere");
     }
 
     @FXML
