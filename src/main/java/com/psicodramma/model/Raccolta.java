@@ -32,7 +32,6 @@ public class Raccolta {
     private Set<Edizione> edizioni;
 
     public Raccolta(){
-
     }
 
     public Raccolta(String nome, String descrizione, Utente proprietario) {
@@ -63,6 +62,26 @@ public class Raccolta {
         return proprietario;
     }
     
+    public void setProprietario(Utente proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public Set<Edizione> getEdizioni() {
+        return edizioni;
+    }
+
+    public void setEdizioni(Set<Edizione> edizioni) {
+        this.edizioni = edizioni;
+    }
+
+    public boolean addEdizione(Edizione e){
+        return edizioni.add(e);
+    }
+
+    public boolean removeEdizione(Edizione e){
+        return edizioni.remove(e);
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

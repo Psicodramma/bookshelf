@@ -1,6 +1,7 @@
 package com.psicodramma.model;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,6 +36,11 @@ public class Opera extends Interagibile{
     private Set<Edizione> edizioni;
 
     public Opera() {
+    }
+
+    public Opera(int id, String titolo){
+        super.setId(id);
+        this.titolo = titolo;
     }
 
     public Opera(int id, String titolo, String descrizione, String lingua, Set<Autore> autori, Set<Genere> generi, int anno,

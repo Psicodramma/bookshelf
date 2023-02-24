@@ -13,6 +13,7 @@ public class Utente {
     @Basic(fetch = FetchType.LAZY)
     private String nazionalita;
 
+    
     @Embedded
     private Libreria libreria;
     @Transient 
