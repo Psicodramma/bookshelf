@@ -50,7 +50,6 @@ public class AccessService {
         boolean success = true;
         EntityManager em=emf.createEntityManager(); 
         Utente u = new Utente(username, nationality, password);
-        u.setLibreria(new Libreria());
         Libreria l = u.getLibreria();
         l.setProprietario(u);
         for(int i=0; i<TipoAzione.values().length; i++){

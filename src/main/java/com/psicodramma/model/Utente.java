@@ -18,16 +18,20 @@ public class Utente {
     @Transient 
     private Set<Utente> amici;
 
-    public Utente(){ }
+    public Utente(){
+        libreria = new Libreria();
+    }
 
     public Utente(String username) {
         this.username = username;
+        libreria = new Libreria();
     }
 
     public Utente(String username, String nazionalita, String password) {
         this.username = username;
         this.nazionalita = nazionalita;
         this.password = password;
+        libreria = new Libreria();
     }
     public String getUsername() {
         return username;

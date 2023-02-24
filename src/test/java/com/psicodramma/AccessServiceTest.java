@@ -55,7 +55,7 @@ public class AccessServiceTest {
     public static void deleteAll(){
         EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
         em.getTransaction().begin();
-        em.createNativeQuery("Truncate utente");
+        em.createNativeQuery("Truncate utente, raccolta cascade");
         em.getTransaction().commit();
         em.close();
     }
