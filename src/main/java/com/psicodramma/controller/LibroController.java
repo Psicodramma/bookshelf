@@ -42,7 +42,7 @@ public class LibroController {
     public LibroController(Opera opera){
         this.opera = opera;
         bookService = new BookService();
-        // FORSE DA LEVARE
+        
         Collection<Edizione> res = opera.getEdizioni();
         editionList.setAll(res);
     }
@@ -57,8 +57,8 @@ public class LibroController {
             labelAnno.setText(String.valueOf(opera.getAnno()));
             labelDescrizione.setText(opera.getDescrizione());
             labelLingua.setText(opera.getLingua());
-            labelAutori.setText(String.join(", ", opera.getAutori()));
-            labelGeneri.setText(String.join(", ", opera.getGeneri()));
+            //labelAutori.setText(String.join(", ", opera.getAutori().forEach((autore) .);));
+            //labelGeneri.setText(String.join(", ", opera.getGeneri()));
 
             likesController.setInteragibile(opera);
         }else{

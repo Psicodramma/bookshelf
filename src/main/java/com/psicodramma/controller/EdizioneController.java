@@ -6,6 +6,7 @@ import java.util.Objects;
 import com.psicodramma.App;
 import com.psicodramma.UIControl.LikeCommentButton;
 import com.psicodramma.model.Edizione;
+import com.psicodramma.service.BookService;
 import com.psicodramma.service.InteractionService;
 
 import javafx.fxml.FXML;
@@ -34,17 +35,19 @@ public class EdizioneController {
 
     private Edizione edizione;
     private InteractionService interactionService;
+    private BookService bookService;
 
     public EdizioneController(Edizione edizione){
         this.edizione = edizione;
         interactionService = new InteractionService();
+        bookService = new BookService();
     }
 
     @FXML
     private void initialize() { 
         if(!Objects.isNull(edizione)){
             labelNomeOpera.setText(edizione.getOpera().getTitolo());
-            labelAutori.setText(String.join(", ", edizione.getOpera().getAutori()));
+            labelAutori.setText(edizione.getOpera().getAutoriToString());
             labelAnno.setText(String.valueOf(edizione.getOpera().getAnno()));
             if(edizione.getDescrizione() != null && !edizione.getDescrizione().equals("")){
                 labelDescrizione.setText(edizione.getDescrizione());
@@ -52,7 +55,7 @@ public class EdizioneController {
                 labelDescrizione.setText(edizione.getOpera().getDescrizione());
             }
             labelLinguaOriginale.setText(edizione.getOpera().getLingua());
-            labelGeneri.setText(String.join(", ", edizione.getOpera().getGeneri()));
+            labelGeneri.setText(edizione.getOpera().getGeneriToString());
             labelEditore.setText(edizione.getEditore());
             labelPaese.setText(edizione.getPaese());
             labelLingua.setText(edizione.getLingua());

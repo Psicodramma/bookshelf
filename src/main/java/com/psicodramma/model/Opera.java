@@ -3,10 +3,13 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+
 @Entity
 @Table(name="opera")
 public class Opera extends Interagibile{
@@ -14,19 +17,27 @@ public class Opera extends Interagibile{
     private String descrizione;
     @Column(name="lingua_originale")
     private String lingua;
-    @Transient
-    private Set<String> autori;
-    @Transient
-    private Set<String> generi;
+    @ManyToMany
+    @JoinTable(
+        name = "autore_opera", 
+        joinColumns = @JoinColumn(name = "id_opera"), 
+        inverseJoinColumns = @JoinColumn(name = "id_autore"))
+    private Set<Autore> autori;
+    @ManyToMany
+    @JoinTable(
+        name = "genere_opera", 
+        joinColumns = @JoinColumn(name = "id_opera"), 
+        inverseJoinColumns = @JoinColumn(name = "id_genere"))
+    private Set<Genere> generi;
     private int anno;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_opera")
     private Set<Edizione> edizioni;
 
     public Opera() {
     }
 
-    public Opera(int id, String titolo, String descrizione, String lingua, Set<String> autori, Set<String> generi, int anno,
+    public Opera(int id, String titolo, String descrizione, String lingua, Set<Autore> autori, Set<Genere> generi, int anno,
             Set<Edizione> edizioni) {
         super.setId(id);
         this.titolo = titolo;
@@ -37,9 +48,10 @@ public class Opera extends Interagibile{
         this.anno = anno;
         this.edizioni = edizioni;
     }
-    public Opera(String titolo, String descrizione, String lingua, Set<String> autori, Set<String> generi, int anno,
-    Set<Edizione> edizioni) {
-                this.titolo = titolo;
+
+    public Opera(String titolo, String descrizione, String lingua, Set<Autore> autori, Set<Genere> generi, int anno,
+            Set<Edizione> edizioni) {
+        this.titolo = titolo;
         this.descrizione = descrizione;
         this.lingua = lingua;
         this.autori = autori;
@@ -61,16 +73,16 @@ public class Opera extends Interagibile{
     public void setLingua(String lingua) {
         this.lingua = lingua;
     }
-    public Set<String> getAutori() {
+    public Set<Autore> getAutori() {
         return autori;
     }
-    public void setAutori(Set<String> autori) {
+    public void setAutori(Set<Autore> autori) {
         this.autori = autori;
     }
-    public Set<String> getGeneri() {
+    public Set<Genere> getGeneri() {
         return generi;
     }
-    public void setGeneri(Set<String> generi) {
+    public void setGeneri(Set<Genere> generi) {
         this.generi = generi;
     }
     public int getAnno() {
@@ -92,7 +104,21 @@ public class Opera extends Interagibile{
         this.titolo = titolo;
     }
 
-    
+    public String getGeneriToString(){
+        String sGeneri = "";
+        for(Genere g : generi){
+            sGeneri = String.join(", ", g.getNome(), sGeneri);
+        }
+        return sGeneri;
+    }
+
+    public String getAutoriToString(){
+        String sAutori = "";
+        for(Autore a : autori){
+            sAutori = String.join(", ", a.toString(), sAutori);
+        }
+        return sAutori;
+    }
 
 }
 
