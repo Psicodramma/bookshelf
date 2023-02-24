@@ -1,9 +1,12 @@
 package com.psicodramma.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -19,6 +22,14 @@ public class Raccolta {
     @ManyToOne
     @JoinColumn(name = "id_utente")
     private Utente proprietario;
+
+    @ManyToMany
+    @JoinTable(
+        name = "edizione_raccolta", 
+        joinColumns = {@JoinColumn(name = "nome_raccolta", referencedColumnName = "nome"), 
+        @JoinColumn(name="id_utente", referencedColumnName = "id_utente")}, 
+        inverseJoinColumns = @JoinColumn(name = "id_edizione", referencedColumnName = "id"))
+    private Set<Edizione> edizioni;
 
     public Raccolta(){
 
