@@ -41,7 +41,7 @@
       </AnchorPane>
    </content>
    <buttonTypes>
-      <ButtonType fx:constant="APPLY" />
-      <ButtonType fx:constant="CLOSE" />
+      <ButtonType fx:id="buttonConfirm" text="Conferma" buttonData="OK_DONE" />
+      <ButtonType fx:id="buttonCancel" text="Cancella" buttonData="CANCEL_CLOSE" />
    </buttonTypes>
 </DialogPane>
