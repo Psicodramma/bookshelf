@@ -74,11 +74,13 @@ public class AccessController {
         }else{
             boolean success = accessService.register(usernameTextbox.getText(), passwordTextbox.getText(), nationalityTextbox.getText());
             if(success){
-                ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
+                // ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
+                login();
             } else {
                 ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "L'utente è già registrato");
             }
         }
+
     }
 
     @FXML
