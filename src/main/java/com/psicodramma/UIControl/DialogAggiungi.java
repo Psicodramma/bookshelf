@@ -102,16 +102,16 @@ public class DialogAggiungi extends Dialog<Raccolta>{
         grid.add(descrizione, 1, 1);
 
         // Validazione
-        Node loginButton = dialog.getDialogPane().lookupButton(buttonConferma);
+        Node button = dialog.getDialogPane().lookupButton(buttonConferma);
         nome.textProperty().addListener((observable, oldValue, newValue) -> {
-            loginButton.setDisable(newValue.trim().isEmpty());
+            button.setDisable(newValue.trim().isEmpty());
         });
 
         dialog.getDialogPane().setContent(grid);
         Platform.runLater(() -> nome.requestFocus());
 
         dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == buttonConfirm) {
+            if (dialogButton == buttonConferma) {
                 return new Pair<>(nome.getText().trim(), descrizione.getText().trim());
             }
             return null;
