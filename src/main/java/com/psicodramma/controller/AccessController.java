@@ -10,6 +10,7 @@ import com.psicodramma.service.LibraryService;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AccessController {
     @FXML protected TextField usernameTextbox;
@@ -34,12 +35,11 @@ public class AccessController {
     @FXML
     private void switchToRegister() throws IOException {
         App.setRoot("register");
+
     }
 
     @FXML
     private void switchToLogin() throws IOException {
-        String provaUserData = usernameTextbox.getText().trim();
-        App.setData(provaUserData);
         App.setRoot("login");
     }
 
@@ -57,7 +57,9 @@ public class AccessController {
             if(canLogin){
                 ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "Accesso effettuato");
                 App.setData(accessService.getUser(username));
+                Stage s = (Stage) usernameTextbox.getScene().getWindow();
                 App.setRoot("timeline");
+                s.setMaximized(true);
             }else{
                 ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Accesso Negato");
             }
