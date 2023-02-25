@@ -33,14 +33,12 @@ public class AccessController {
 
     @FXML
     private void switchToRegister() throws IOException {
-        String provaUserData = usernameTextbox.getText();
-        App.setData(provaUserData);
         App.setRoot("register");
     }
 
     @FXML
     private void switchToLogin() throws IOException {
-        String provaUserData = usernameTextbox.getText();
+        String provaUserData = usernameTextbox.getText().trim();
         App.setData(provaUserData);
         App.setRoot("login");
     }
@@ -48,11 +46,11 @@ public class AccessController {
     @FXML
     private void login() throws IOException {
         //controllo dei dati
-        String username = usernameTextbox.getText();
+        String username = usernameTextbox.getText().trim();
         if(username.equals("")) {
             ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
         } else {
-            String password = passwordTextbox.getText();
+            String password = passwordTextbox.getText().trim();
             
             boolean canLogin = accessService.login(username, password);
 
@@ -69,10 +67,10 @@ public class AccessController {
     @FXML
     private void register() throws IOException {
         //controllo dei dati
-        if(usernameTextbox.getText().equals("") || nationalityTextbox.getText().equals("") || passwordTextbox.getText().equals("")){
+        if(usernameTextbox.getText().trim().isEmpty() || nationalityTextbox.getText().trim().isEmpty() || passwordTextbox.getText().trim().isEmpty()){
             ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Campi Obbligatori");
         }else{
-            boolean success = accessService.register(usernameTextbox.getText(), passwordTextbox.getText(), nationalityTextbox.getText());
+            boolean success = accessService.register(usernameTextbox.getText().trim(), passwordTextbox.getText().trim(), nationalityTextbox.getText().trim());
             if(success){
                 // ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
                 login();
@@ -85,7 +83,7 @@ public class AccessController {
 
     @FXML
     private void recuperaPassword() throws IOException{
-        String username = usernameTextbox.getText();
+        String username = usernameTextbox.getText().trim();
         if(username.equals("")){
             ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Inserire username");
         } else {

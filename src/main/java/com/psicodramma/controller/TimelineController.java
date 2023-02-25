@@ -96,7 +96,7 @@ public class TimelineController {
 
     @FXML 
     private void gotoRicerca(){
-        RicercaController ricercaController = new RicercaController(searchBox.getText(), (BiFunction<OperaDao, String, Collection<Opera>>) group.getSelectedToggle().getUserData());
+        RicercaController ricercaController = new RicercaController(searchBox.getText().trim(), (BiFunction<OperaDao, String, Collection<Opera>>) group.getSelectedToggle().getUserData());
         try {
             App.setRoot("ricerca", ricercaController);
         } catch (IOException e) {

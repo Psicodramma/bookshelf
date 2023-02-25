@@ -2,6 +2,7 @@ package com.psicodramma.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embeddable;
@@ -63,5 +64,8 @@ public class Libreria {
         return true;
     }
 
+    public Optional<Raccolta> getRaccolta(String nome){
+        return raccoltePersonali.parallelStream().filter(x -> x.getNome().equals(nome)).findFirst();
+    }
     
 }

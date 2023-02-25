@@ -5,23 +5,19 @@ import java.util.Objects;
 
 import com.psicodramma.model.Raccolta;
 import com.psicodramma.model.Utente;
+import com.psicodramma.service.LibraryService;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 
 public class DialogAggiungi extends Dialog<Raccolta>{
@@ -33,12 +29,14 @@ public class DialogAggiungi extends Dialog<Raccolta>{
 
     private ObservableList<Raccolta> obsList = FXCollections.observableArrayList();
     private Utente utente;
+    private LibraryService libraryService;
 
     public DialogAggiungi() { }
 
     public DialogAggiungi(Utente utente){
         this.utente = utente;
         obsList.setAll(utente.getLibreria().getRaccoltePersonali());
+        libraryService = new LibraryService();
         loadFXML();
     }
     
@@ -77,8 +75,8 @@ public class DialogAggiungi extends Dialog<Raccolta>{
         alert.setHeaderText("Inserisci il nome della raccolta che vuoi creare");
         alert.showAndWait();
 
-        if (alert.getResult() != null && alert.getResult() != "") {
-            
+        if (alert.getResult() != null && alert.getResult().trim() != "") {
+            obsList.add(libraryService.createRaccolta(alert.getResult().trim(), "", utente));
         }
     }
 

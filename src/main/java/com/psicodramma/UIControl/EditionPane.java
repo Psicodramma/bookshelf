@@ -6,28 +6,21 @@ import java.text.DateFormat;
 import com.psicodramma.App;
 import com.psicodramma.controller.EdizioneController;
 import com.psicodramma.model.Edizione;
-import com.psicodramma.model.Raccolta;
 import com.psicodramma.model.Utente;
+import com.psicodramma.model.enums.TipoAzione;
 import com.psicodramma.service.LibraryService;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class EditionPane extends ListCell<Edizione>{
     @FXML private AnchorPane pannello;
@@ -40,9 +33,11 @@ public class EditionPane extends ListCell<Edizione>{
 
     private Edizione edizione;
     private LibraryService libraryService;
+    private Utente utente;
 
     public EditionPane() {
         libraryService = new LibraryService();
+
         loadFXML();
     }
 
@@ -51,6 +46,7 @@ public class EditionPane extends ListCell<Edizione>{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/psicodramma/custom/edition_pane.fxml"));
             loader.setController(this);
             loader.load();
+            utente = (Utente) App.getData();
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -76,30 +72,33 @@ public class EditionPane extends ListCell<Edizione>{
 
     @FXML
     private void setAsToRead() {
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Delete ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Aggiungere in lettura?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            
+            libraryService.addEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.DALEGGERE.toString()).get());
         }
+        readButton.setText("In lettura");
         readButton.setOnMouseClicked((mouseEvent) -> removeToRead());
+        
     }
 
     @FXML
     private void removeToRead() {
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Delete ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Rimuovere dalle edizioni in lettura?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            
+            libraryService.removeEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.DALEGGERE.toString()).get());
         }
+        readButton.setText("Da leggere");
         readButton.setOnMouseClicked((mouseEvent) -> setAsToRead());
+        
     }
 
     @FXML
     private void modifyState() {
-        Utente u = (Utente) App.getData();
-        DialogAggiungi dia = new DialogAggiungi(u);
+        DialogAggiungi dia = new DialogAggiungi(utente);
         
         dia.showAndWait();
 
