@@ -35,7 +35,6 @@ public class AccessController {
     @FXML
     private void switchToRegister() throws IOException {
         App.setRoot("register");
-
     }
 
     @FXML
@@ -60,6 +59,7 @@ public class AccessController {
                 Stage s = (Stage) usernameTextbox.getScene().getWindow();
                 App.setRoot("timeline");
                 s.setMaximized(true);
+                s.setResizable(true);
             }else{
                 ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "Accesso Negato");
             }
