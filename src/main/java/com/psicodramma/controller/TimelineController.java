@@ -104,6 +104,16 @@ public class TimelineController {
         }
     }
 
+    @FXML 
+    private void gotoLibreria(){
+        LibreriaController ricercaController = new LibreriaController(utente);
+        try {
+            App.setRoot("libreria", ricercaController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setupListView() {
         actionViewList.setItems(actionList);
         actionViewList.setCellFactory((param) -> new ActionPane());

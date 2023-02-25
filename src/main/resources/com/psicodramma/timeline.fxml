@@ -36,6 +36,7 @@
                               <Image url="@icon/refresh.png" />
                            </image>
                         </ImageView>
+                        <Button layoutX="273.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#gotoLibreria" text="Profilo" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="273.0" AnchorPane.topAnchor="20.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
