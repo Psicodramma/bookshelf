@@ -31,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
+@SuppressWarnings("unchecked")
 public class TimelineController {
     @FXML private ListView<Azione> actionViewList;
     @FXML private BarChart<String, Long> actionWeekChart;
@@ -38,6 +39,7 @@ public class TimelineController {
     @FXML private VBox vb;    
     @FXML private ListView<Edizione> recommendations;    
 
+    private boolean filterState = false;
     private ObservableList<Azione> actionList = FXCollections.observableArrayList();
     private ObservableList<Edizione> raccomandati = FXCollections.observableArrayList();
     private ToggleGroup group = new ToggleGroup();
@@ -112,6 +114,24 @@ public class TimelineController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML 
+    private void refresh(){
+        List<Azione> res = timelineService.getActionList();
+        actionList.setAll(res);
+    }
+
+    @FXML 
+    private void filter(){
+        if(filterState){
+            List<Azione> res = timelineService.getActionList();
+            actionList.setAll(res);
+        } else {
+            List<Azione> res = timelineService.getAzioniSeguiti(utente);
+            actionList.setAll(res);
+        }
+        filterState = !filterState;
     }
 
     private void setupListView() {

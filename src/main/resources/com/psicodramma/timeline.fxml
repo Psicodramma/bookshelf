@@ -26,12 +26,12 @@
                <children>
                   <AnchorPane prefHeight="72.0" prefWidth="598.0" VBox.vgrow="NEVER">
                      <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <ImageView fitHeight="32.0" fitWidth="32.0" onMouseClicked="#filter" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                            <image>
                               <Image url="@icon/filter.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="16.0">
+                        <ImageView fitHeight="32.0" fitWidth="32.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="16.0">
                            <image>
                               <Image url="@icon/refresh.png" />
                            </image>

@@ -16,17 +16,18 @@ import jakarta.persistence.Persistence;
 public class TimelineService {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("default"); 
+    private AzioneDao azioneDao = new AzioneDao();
 
     public List<Azione> getActionList(){
-        List<Azione> res = null; 
-        EntityManager em = emf.createEntityManager();
-        res = em.createNativeQuery("select a.* from azione a", Azione.class).getResultList();
-        return res;
+        return azioneDao.getAzioni();
+    }
+
+    public List<Azione> getAzioniSeguiti(Utente u){
+        return azioneDao.getAzioniSeguiti(u.getUsername());
     }
 
     public Map<String, Long> getAzioniGiorno(Utente u){
-        AzioneDao ad = new AzioneDao();
-        return ad.getAzioniGiorno(u.getUsername());
+        return azioneDao.getAzioniGiorno(u.getUsername());
     }
     
     public List<Edizione> getRaccomandati(Utente utente) {
