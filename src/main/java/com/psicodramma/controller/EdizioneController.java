@@ -1,5 +1,6 @@
 package com.psicodramma.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class EdizioneController {
@@ -51,6 +53,7 @@ public class EdizioneController {
     @FXML
     private void initialize() { 
         if(!Objects.isNull(edizione)){
+            imgEdizione.setImage(new Image(new File(edizione.getUrl()).toURI().toString()));
             labelNomeOpera.setText(edizione.getOpera().getTitolo());
             labelAutori.setText(edizione.getOpera().getAutoriToString());
             labelAnno.setText(String.valueOf(edizione.getOpera().getAnno()));

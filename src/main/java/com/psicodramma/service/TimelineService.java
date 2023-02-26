@@ -50,12 +50,12 @@ public class TimelineService {
 
         if(res.size() < 5){
             res.addAll(em.createNativeQuery(String.join("\n"
-            , "select e.id, e.data_pubblicazione, e.editore, e.lingua, e.id_opera"
+            , "select e.id, e.data_pubblicazione, e.editore, e.lingua, e.id_opera, e.url"
             , "from edizione e "
             , "join mi_piace mp on (mp.tipo_riferimento = 'edizione' and e.id = mp.id_riferimento)"
             , "or (mp.tipo_riferimento = 'opera' and e.id_opera = mp.id_riferimento)"
             , "where e.id not in (select id_edizione from edizione_raccolta where id_utente = ?2)"
-            , "group by e.id, e.data_pubblicazione, e.editore, e.lingua, e.id_opera"
+            , "group by e.id, e.data_pubblicazione, e.editore, e.lingua, e.id_opera, e.url"
             , "order by count(e.id) DESC"
             , "LIMIT ?1"), Edizione.class).setParameter(1, 5 - res.size()).setParameter(2, utente.getUsername()).getResultList());
         }

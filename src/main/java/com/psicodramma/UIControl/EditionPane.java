@@ -1,5 +1,6 @@
 package com.psicodramma.UIControl;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 
@@ -19,12 +20,14 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class EditionPane extends ListCell<Edizione>{
     @FXML private AnchorPane pannello;
     @FXML private ImageView immagineEdizione;
+    @FXML private Label labelTitolo;
     @FXML private Label labelLingua;
     @FXML private Label labelAnno;
     @FXML private Label labelEditore;
@@ -119,6 +122,8 @@ public class EditionPane extends ListCell<Edizione>{
             edizione = item;
             setGraphic(pannello);
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            labelTitolo.setText(edizione.getOpera().getTitolo());
+            immagineEdizione.setImage(new Image(new File(edizione.getUrl()).toURI().toString()));
             labelAnno.setText(DateFormat.getDateInstance().format(edizione.getDataPubblicazione()));
             labelEditore.setText(edizione.getEditore());
             labelLingua.setText(edizione.getLingua());
