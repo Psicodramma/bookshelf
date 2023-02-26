@@ -88,7 +88,13 @@ public class Edizione extends Interagibile{
     }
     public void setOpera(Opera opera) {
         this.opera = opera;
+    }
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }  
-
-
+    @Override
+    public boolean equals(Object obj){
+        return super.equals(obj);
+    }
 }

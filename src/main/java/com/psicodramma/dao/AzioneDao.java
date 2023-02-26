@@ -23,6 +23,10 @@ public class AzioneDao {
         emf = Persistence.createEntityManagerFactory("default");
     }
 
+    public AzioneDao(String persistenceUnit){
+        emf = Persistence.createEntityManagerFactory(persistenceUnit);
+    }
+
     public List<Azione> getAzioni(){
         EntityManager em = emf.createEntityManager();
         List<Azione> res = em.createNativeQuery("select * from azione order by timestamp desc", Azione.class).getResultList();;

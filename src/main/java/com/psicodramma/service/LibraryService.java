@@ -22,6 +22,7 @@ public class LibraryService {
 
     public LibraryService(String persistenceUnit){
         raccoltaDao = new RaccoltaDao(persistenceUnit);
+        azioneDao = new AzioneDao(persistenceUnit);
     }
 
     public Libreria createLibreria(Utente u){
@@ -97,7 +98,7 @@ public class LibraryService {
         return true;
     }
     
-    private void addAzione(Edizione edizione, Raccolta raccolta) {
+    public void addAzione(Edizione edizione, Raccolta raccolta) {
         Optional<TipoAzione> tipo = Stream.of(TipoAzione.values()).filter(x -> x.raccolta.equals(raccolta.getNome())).findFirst();
         if(tipo.isPresent()) azioneDao.aggiungiAzione(edizione, raccolta, tipo.get());
     }
