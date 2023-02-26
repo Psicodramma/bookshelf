@@ -1,12 +1,15 @@
 package com.psicodramma.dao;
 
 import java.lang.reflect.Array;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.psicodramma.model.Azione;
+import com.psicodramma.model.Edizione;
+import com.psicodramma.model.Raccolta;
+import com.psicodramma.model.enums.TipoAzione;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -46,5 +49,14 @@ public class AzioneDao {
             .getResultList();
         em.close();
         return res;
+    }
+
+    public void aggiungiAzione(Edizione edizione, Raccolta raccolta){
+        EntityManager em = emf.createEntityManager();
+        Azione azione = new Azione(edizione, raccolta.getProprietario(), TipoAzione.valueOf(raccolta.getNome()), new Date());
+        em.getTransaction().begin();
+        em.persist(azione);
+        em.getTransaction().commit();
+        em.close();
     }
 }

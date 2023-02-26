@@ -11,7 +11,7 @@ import jakarta.persistence.Transient;
 @MappedSuperclass
 public abstract class Interagibile {
     @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     @Transient protected Set<String> like;
     @Transient protected Set<Commento> commenti;

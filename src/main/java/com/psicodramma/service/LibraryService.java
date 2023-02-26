@@ -1,5 +1,8 @@
 package com.psicodramma.service;
 
+import java.util.stream.Stream;
+
+import com.psicodramma.dao.AzioneDao;
 import com.psicodramma.dao.RaccoltaDao;
 import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Libreria;
@@ -9,9 +12,11 @@ import com.psicodramma.model.enums.TipoAzione;
 
 public class LibraryService {
     private RaccoltaDao raccoltaDao;
+    private AzioneDao azioneDao;
 
     public LibraryService(){
         raccoltaDao = new RaccoltaDao("default");
+        azioneDao = new AzioneDao();
     }
 
     public LibraryService(String persistenceUnit){
@@ -31,12 +36,15 @@ public class LibraryService {
     public boolean addEdizione(Edizione edizione, Raccolta raccolta){
         boolean out = raccolta.addEdizione(edizione);
         raccoltaDao.update(raccolta);
+        if(Stream.of(TipoAzione.values()).anyMatch(x -> x.toString().equals(raccolta.getNome())))
+            azioneDao.aggiungiAzione(edizione, raccolta);
         return out;
     }
 
     public boolean removeEdizione(Edizione edizione, Raccolta raccolta){
         if(raccolta.removeEdizione(edizione)){
             raccoltaDao.update(raccolta);
+
             return true;
         }
         return false;

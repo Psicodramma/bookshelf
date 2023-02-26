@@ -32,6 +32,16 @@ public class Azione extends Interagibile {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
+    public Azione(){
+        
+    }
+
+    public Azione(Edizione edizione, Utente utente, TipoAzione tipo, Date timestamp) {
+        this.edizione = edizione;
+        this.utente = utente;
+        this.tipo = tipo;
+        this.timestamp = timestamp;
+    }
     public Edizione getEdizione() {
         return edizione;
     }
