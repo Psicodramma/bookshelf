@@ -7,9 +7,7 @@ import java.util.function.BiFunction;
 import com.psicodramma.App;
 import com.psicodramma.UIControl.OperaPane;
 import com.psicodramma.dao.OperaDao;
-import com.psicodramma.model.Interagibile;
 import com.psicodramma.model.Opera;
-import com.psicodramma.model.Utente;
 import com.psicodramma.service.BookService;
 
 import javafx.collections.FXCollections;
@@ -24,8 +22,6 @@ public class RicercaController {
 
     private ObservableList<Opera> operaList = FXCollections.observableArrayList();
     private BookService bookService;
-    private Interagibile interagibile;
-    private Utente utente;
 
     public RicercaController(){
         bookService = new BookService();

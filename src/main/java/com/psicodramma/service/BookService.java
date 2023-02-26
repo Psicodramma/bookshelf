@@ -4,18 +4,12 @@ import java.util.Collection;
 import java.util.function.BiFunction;
 
 import com.psicodramma.dao.OperaDao;
-import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Opera;
 
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-
-public class BookService {
-    private EntityManagerFactory emf; 
+public class BookService { 
     private OperaDao od;
     
     public BookService(){
-        emf = Persistence.createEntityManagerFactory("default");
         od = new OperaDao();
     }
 
@@ -28,9 +22,4 @@ public class BookService {
         //});
         return oc;
     }
-
-    public Collection<Edizione> getEditionList() {
-        return null;
-    }
-    
 }

@@ -1,14 +1,6 @@
 package com.psicodramma.service;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import com.psicodramma.model.Libreria;
-import com.psicodramma.model.Raccolta;
 import com.psicodramma.model.Utente;
-import com.psicodramma.model.enums.TipoAzione;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -48,14 +40,10 @@ public class AccessService {
 
     public boolean register(String username, String password, String nationality){
         boolean success = true;
+        LibraryService libraryService = new LibraryService();
         EntityManager em=emf.createEntityManager(); 
         Utente u = new Utente(username, nationality, password);
-        Libreria l = u.getLibreria();
-        l.setProprietario(u);
-        for(int i=0; i<TipoAzione.values().length; i++){
-            l.addRaccolta(new Raccolta(TipoAzione.values()[i].toString(), u));
-        }
-        
+        libraryService.createLibreria(u);
         try{   
             em.getTransaction().begin(); 
             em.persist(u);

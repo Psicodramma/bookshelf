@@ -9,7 +9,6 @@ import com.psicodramma.UIControl.EditionPane;
 import com.psicodramma.UIControl.LikeCommentButton;
 import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Opera;
-import com.psicodramma.service.BookService;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,16 +31,12 @@ public class LibroController {
     
     private ObservableList<Edizione> editionList = FXCollections.observableArrayList();
 
-    private BookService bookService;
     private Opera opera;
 
-    public LibroController() {
-        bookService = new BookService();
-    }
+    public LibroController() { }
 
     public LibroController(Opera opera){
         this.opera = opera;
-        bookService = new BookService();
         
         Collection<Edizione> res = opera.getEdizioni();
         editionList.setAll(res);
@@ -51,14 +46,14 @@ public class LibroController {
     private void initialize() { 
         if(!Objects.isNull(opera)){
             edizioniList.setItems(editionList);
-            edizioniList.setCellFactory((param) -> new EditionPane());
+            edizioniList.setCellFactory((param) -> new EditionPane(true));
 
             labelNomeOpera.setText(opera.getTitolo());
             labelAnno.setText(String.valueOf(opera.getAnno()));
             labelDescrizione.setText(opera.getDescrizione());
             labelLingua.setText(opera.getLingua());
-            //labelAutori.setText(String.join(", ", opera.getAutori().forEach((autore) .);));
-            //labelGeneri.setText(String.join(", ", opera.getGeneri()));
+            labelAutori.setText(opera.getAutoriToString());
+            labelGeneri.setText(opera.getGeneriToString());
 
             likesController.setInteragibile(opera);
         }else{

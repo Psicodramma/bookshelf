@@ -2,8 +2,10 @@ package com.psicodramma.service;
 
 import com.psicodramma.dao.RaccoltaDao;
 import com.psicodramma.model.Edizione;
+import com.psicodramma.model.Libreria;
 import com.psicodramma.model.Raccolta;
 import com.psicodramma.model.Utente;
+import com.psicodramma.model.enums.TipoAzione;
 
 public class LibraryService {
     private RaccoltaDao raccoltaDao;
@@ -14,6 +16,16 @@ public class LibraryService {
 
     public LibraryService(String persistenceUnit){
         raccoltaDao = new RaccoltaDao(persistenceUnit);
+    }
+
+    public Libreria createLibreria(Utente u){
+        Libreria l = u.getLibreria();
+        l.setProprietario(u);
+        for(int i=0; i<TipoAzione.values().length; i++){
+            l.addRaccolta(new Raccolta(TipoAzione.values()[i].toString(), u));
+        }
+
+        return l;
     }
 
     public boolean addEdizione(Edizione edizione, Raccolta raccolta){

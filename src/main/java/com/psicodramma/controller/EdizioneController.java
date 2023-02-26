@@ -6,11 +6,15 @@ import java.util.Objects;
 import com.psicodramma.App;
 import com.psicodramma.UIControl.LikeCommentButton;
 import com.psicodramma.model.Edizione;
-import com.psicodramma.service.BookService;
-import com.psicodramma.service.InteractionService;
+import com.psicodramma.model.Utente;
+import com.psicodramma.model.enums.TipoAzione;
+import com.psicodramma.service.LibraryService;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
@@ -33,14 +37,14 @@ public class EdizioneController {
     @FXML private Label labelLinguaEdizione;
     @FXML private Label labelISBN;
 
+    private Utente utente;
     private Edizione edizione;
-    private InteractionService interactionService;
-    private BookService bookService;
+    private LibraryService libraryService;
 
     public EdizioneController(Edizione edizione){
         this.edizione = edizione;
-        interactionService = new InteractionService();
-        bookService = new BookService();
+        utente = (Utente) App.getData();
+        libraryService = new LibraryService();
     }
 
     @FXML
@@ -63,6 +67,8 @@ public class EdizioneController {
             labelLinguaEdizione.setText(edizione.getLingua());
             labelISBN.setText(edizione.getIsbn());
 
+            utente.getLibreria().getRaccolta(TipoAzione.LETTO.toString()).ifPresent((raccolta) -> readButton.setVisible(!raccolta.contains(edizione)));
+
             likesController.setInteragibile(edizione);
         } else {
             labelNomeOpera.setText("Edizione non presente");
@@ -71,7 +77,13 @@ public class EdizioneController {
 
     @FXML
     private void setAsLetto(){
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Aggiungere ai letti?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
 
+        if (alert.getResult() == ButtonType.YES) {
+            libraryService.addEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.LETTO.toString()).get());
+        }
+        readButton.setVisible(false);
     }
 
     @FXML

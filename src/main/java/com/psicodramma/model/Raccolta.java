@@ -82,6 +82,10 @@ public class Raccolta {
         return edizioni.remove(e);
     }
 
+    public boolean contains(Edizione e){
+        return edizioni.contains(e);
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

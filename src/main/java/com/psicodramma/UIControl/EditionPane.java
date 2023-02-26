@@ -31,13 +31,14 @@ public class EditionPane extends ListCell<Edizione>{
     @FXML private Button stateButton;
     @FXML private Button readButton;
 
+    private boolean showButtons;
     private Edizione edizione;
     private LibraryService libraryService;
     private Utente utente;
 
-    public EditionPane() {
+    public EditionPane(boolean showButtons) {
         libraryService = new LibraryService();
-
+        this.showButtons = showButtons;
         loadFXML();
     }
 
@@ -56,8 +57,13 @@ public class EditionPane extends ListCell<Edizione>{
     @FXML
     private void initialize(){
         immagineEdizione.setOnMouseClicked((mouseEvent) -> gotoEdizione());
-        readButton.setOnMouseClicked((mouseEvent) -> setAsToRead());
-        stateButton.setOnMouseClicked((mouseEvent) -> modifyState());
+        if(showButtons){
+            readButton.setOnMouseClicked((mouseEvent) -> setAsToRead());
+            stateButton.setOnMouseClicked((mouseEvent) -> modifyState());
+        } else {
+            readButton.setVisible(showButtons);
+            stateButton.setVisible(showButtons);
+        }
     }
 
     @FXML
@@ -99,7 +105,6 @@ public class EditionPane extends ListCell<Edizione>{
     @FXML
     private void modifyState() {
         DialogAggiungi dia = new DialogAggiungi(utente);
-        
         dia.showAndWait();
 
     }

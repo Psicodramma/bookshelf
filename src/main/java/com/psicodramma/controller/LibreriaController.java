@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -27,6 +28,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,7 +43,7 @@ public class LibreriaController {
     @FXML private Label labelUtente;
     @FXML private VBox raccolteBox;
     @FXML private Button followButton;
-    private List<ListView<Edizione>> raccolte;
+    @FXML private ScrollPane sPane;
     
     private List<ObservableList<Edizione>> liste;
 
@@ -60,36 +62,7 @@ public class LibreriaController {
     @FXML
     private void initialize() { 
         if(!Objects.isNull(utente)){
-            raccolte = new ArrayList<ListView<Edizione>>(utente.getLibreria().getRaccoltePersonali().size());
-            liste = new ArrayList<ObservableList<Edizione>>(utente.getLibreria().getRaccoltePersonali().size());
-            for (Raccolta r : utente.getLibreria().getRaccoltePersonali()) {
-                // inizializzo le observableList
-                ObservableList<Edizione> oal = FXCollections.observableArrayList();
-                oal.setAll(r.getEdizioni());
-                liste.add(oal);
-
-                //inizializzo l'interfaccia per ogni raccolta
-                AnchorPane ap = new AnchorPane();
-                VBox.setVgrow(ap, Priority.ALWAYS);
-                Label labelNome = new Label(r.getNome());
-                AnchorPane.setTopAnchor(labelNome, (double) 5);
-                AnchorPane.setLeftAnchor(labelNome, (double) 5);
-                Label labelDesc = new Label(r.getDescrizione());
-                labelDesc.setLayoutX(850);
-                AnchorPane.setTopAnchor(labelDesc, (double) 5);
-                AnchorPane.setRightAnchor(labelDesc, (double) 5);
-                ListView<Edizione> lv = new ListView<>();
-                AnchorPane.setTopAnchor(lv, (double) 25);
-                AnchorPane.setLeftAnchor(lv, (double) 0);
-                AnchorPane.setRightAnchor(lv, (double) 0);
-                AnchorPane.setBottomAnchor(lv, (double) 0);
-                lv.setItems(oal);
-                lv.setCellFactory((param) -> new EditionPane());
-                ap.getChildren().addAll(labelNome, labelDesc, lv);
-                ap.setMinWidth(ap.getWidth());
-                ap.setMinHeight(ap.getHeight());
-                raccolteBox.getChildren().add(ap);
-            }
+            setupVBox();
 
             if(utente.equals(App.getData())){
                 followButton.setGraphic(new ImageView(new File("bookshelf/src/main/resources/com/psicodramma/icon/plus.png").toURI().toString()));
@@ -111,6 +84,44 @@ public class LibreriaController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setupVBox(){
+        raccolteBox.getChildren().clear();
+        liste = new ArrayList<ObservableList<Edizione>>(utente.getLibreria().getRaccoltePersonali().size());
+        double height = 0;
+        for (Raccolta r : utente.getLibreria().getRaccoltePersonali()) {
+            // inizializzo le observableList
+            ObservableList<Edizione> oal = FXCollections.observableArrayList();
+            oal.setAll(r.getEdizioni());
+            liste.add(oal);
+
+            //inizializzo l'interfaccia per ogni raccolta
+            AnchorPane ap = new AnchorPane();
+            VBox.setVgrow(ap, Priority.ALWAYS);
+            Label labelNome = new Label(r.getNome());
+            AnchorPane.setTopAnchor(labelNome, (double) 5);
+            AnchorPane.setLeftAnchor(labelNome, (double) 5);
+            Label labelDesc = new Label(r.getDescrizione());
+            labelDesc.setLayoutX(850);
+            AnchorPane.setTopAnchor(labelDesc, (double) 5);
+            AnchorPane.setRightAnchor(labelDesc, (double) 5);
+            ListView<Edizione> lv = new ListView<>();
+            AnchorPane.setTopAnchor(lv, (double) 25);
+            AnchorPane.setLeftAnchor(lv, (double) 0);
+            AnchorPane.setRightAnchor(lv, (double) 0);
+            AnchorPane.setBottomAnchor(lv, (double) 0);
+            lv.setOrientation(Orientation.HORIZONTAL);
+            lv.setItems(oal);
+            lv.setCellFactory((param) -> new EditionPane(false));
+            ap.getChildren().addAll(labelNome, labelDesc, lv);
+            ap.setMinWidth(ap.getWidth());
+            ap.setMinHeight(ap.getHeight());
+            height += ap.getHeight();
+            raccolteBox.getChildren().add(ap);
+        }
+        //raccolteBox.setMinHeight(height);
+        //sPane.setMinHeight(height);
     }
 
     private void segui(){
@@ -161,8 +172,9 @@ public class LibreriaController {
 
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
-        result.ifPresent(usernamePassword -> {
-            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+        result.ifPresent(nomedescrizione -> {
+            libraryService.createRaccolta(nomedescrizione.getKey(), nomedescrizione.getValue(), utente);
+            setupVBox();
         });
     }
 }

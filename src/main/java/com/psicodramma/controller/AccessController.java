@@ -1,12 +1,10 @@
 package com.psicodramma.controller;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import com.psicodramma.App;
 import com.psicodramma.UIControl.ToastController;
 import com.psicodramma.service.AccessService;
-import com.psicodramma.service.LibraryService;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -17,19 +15,14 @@ public class AccessController {
     @FXML protected TextField passwordTextbox;
     @FXML protected TextField nationalityTextbox;
     
-    private Object sharedData;
     private AccessService accessService;
-    private LibraryService libraryService;
 
     public AccessController(){
         accessService = new AccessService();
-        libraryService = new LibraryService();
     }
 
     @FXML
     protected void initialize(){
-        sharedData = App.getData();
-        if(!Objects.isNull(sharedData)) System.out.println("Stringa passata: " + Objects.toString(sharedData));
     }
 
     @FXML
@@ -74,8 +67,8 @@ public class AccessController {
         }else{
             boolean success = accessService.register(usernameTextbox.getText().trim(), passwordTextbox.getText().trim(), nationalityTextbox.getText().trim());
             if(success){
-                // ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "L'utente è stato inserito");
-                login();
+                ToastController.showToast(ToastController.TOAST_SUCCESS, usernameTextbox, "Registrazione Avvenuta con successo");
+                switchToLogin();
             } else {
                 ToastController.showToast(ToastController.TOAST_ERROR, usernameTextbox, "L'utente è già registrato");
             }

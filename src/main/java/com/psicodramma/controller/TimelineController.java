@@ -139,7 +139,7 @@ public class TimelineController {
         actionViewList.setCellFactory((param) -> new ActionPane());
 
         recommendations.setItems(raccomandati);
-        recommendations.setCellFactory((param) -> new EditionPane());
+        recommendations.setCellFactory((param) -> new EditionPane(true));
     }
 
     private void setupActionWeek(){
