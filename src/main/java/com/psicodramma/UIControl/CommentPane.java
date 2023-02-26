@@ -3,8 +3,9 @@ package com.psicodramma.UIControl;
 import java.io.IOException;
 import java.text.DateFormat;
 
+import com.psicodramma.App;
+import com.psicodramma.controller.LibreriaController;
 import com.psicodramma.model.Commento;
-import com.psicodramma.model.Interagibile;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,7 @@ public class CommentPane extends ListCell<Commento>{
     @FXML protected Label labelTimestamp;
     @FXML protected LikeCommentButton likesController;
 
-    private Interagibile interagibile;
+    private Commento interagibile;
     private int level;
 
     public CommentPane(int level) {
@@ -42,22 +43,17 @@ public class CommentPane extends ListCell<Commento>{
         }
     }
 
-    public int getLevel() {
-        return level;
-    }
-
     @FXML
-    private void initialize(){  
-    }
+    private void initialize(){  }
 
     @FXML
     private void gotoRaccoltaUtente() {
-        System.out.println("The button was clicked!");
-    }
-
-    @FXML
-    private void gotoLibro() {
-        System.out.println("The button was clicked!");
+        LibreriaController libreriaController = new LibreriaController(interagibile.getUtente());
+        try {
+            App.setRoot("libreria", libreriaController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

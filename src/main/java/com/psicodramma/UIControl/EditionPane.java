@@ -104,9 +104,8 @@ public class EditionPane extends ListCell<Edizione>{
 
     @FXML
     private void modifyState() {
-        DialogAggiungi dia = new DialogAggiungi(utente);
+        DialogAggiungi dia = new DialogAggiungi(utente, edizione);
         dia.showAndWait();
-
     }
 
     @Override

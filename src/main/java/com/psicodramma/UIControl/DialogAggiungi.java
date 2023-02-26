@@ -1,9 +1,12 @@
 package com.psicodramma.UIControl;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Raccolta;
 import com.psicodramma.model.Utente;
 import com.psicodramma.service.LibraryService;
@@ -23,7 +26,6 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
@@ -38,13 +40,15 @@ public class DialogAggiungi extends Dialog<Raccolta>{
 
     private ObservableList<Raccolta> obsList = FXCollections.observableArrayList();
     private Utente utente;
+    private Edizione edizione;
+    private Raccolta source;
     private LibraryService libraryService;
 
     public DialogAggiungi() { }
 
-    public DialogAggiungi(Utente utente){
+    public DialogAggiungi(Utente utente, Edizione edizione){
         this.utente = utente;
-        obsList.setAll(utente.getLibreria().getRaccoltePersonali());
+        this.edizione = edizione;
         libraryService = new LibraryService();
         loadFXML();
     }
@@ -53,9 +57,7 @@ public class DialogAggiungi extends Dialog<Raccolta>{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/psicodramma/custom/dialog_aggiungi.fxml"));
             loader.setController(this);
-            //loader.setRoot(this);
             DialogPane dialogPane = loader.load();
-            // dialogPane.lookupButton(connectButtonType).addEventFilter(ActionEvent.ANY, this::onConnect);
 
             initModality(Modality.WINDOW_MODAL);
 
@@ -65,7 +67,7 @@ public class DialogAggiungi extends Dialog<Raccolta>{
                 if(!Objects.equals(ButtonBar.ButtonData.OK_DONE, buttonType.getButtonData())) {
                     return null;
                 }
-
+                libraryService.changeRaccolta(edizione, source, raccolteChoice.getValue());
                 return raccolteChoice.getValue();
             });
         }
@@ -74,8 +76,24 @@ public class DialogAggiungi extends Dialog<Raccolta>{
         }
     }
 
-    public DialogPane getdPane() {
-        return dPane;
+    @FXML
+    private void initialize(){
+        var app = utente.getLibreria().getRaccoltePersonali()
+            .stream()
+            .filter(raccolta -> raccolta.contains(edizione))
+            .findFirst();
+
+        if(app.isPresent()){
+            source = app.get();
+        }
+
+        List<Raccolta> raccolte = utente.getLibreria().getRaccoltePersonali()
+                            .stream()
+                            .filter(raccolta -> !raccolta.equals(source))
+                            .collect(Collectors.toList());
+
+        obsList.setAll(raccolte);
+        raccolteChoice.setItems(obsList);
     }
 
     @FXML
@@ -119,27 +137,9 @@ public class DialogAggiungi extends Dialog<Raccolta>{
 
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
-        result.ifPresent(usernamePassword -> {
-            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+        result.ifPresent(nomedescrizione -> {
+            libraryService.createRaccolta(nomedescrizione.getKey(), nomedescrizione.getValue(), utente);
+            
         });
-    }
-
-    @FXML
-    private void conferma(){
-        this.setResult(raccolteChoice.getValue());
-        this.hide();
-        this.close();
-    }
-
-    @FXML
-    private void annulla(){
-        this.setResult(null);
-        this.hide();
-        this.close();
-    }
-
-    @FXML
-    private void initialize(){
-        raccolteChoice.setItems(obsList);
     }
 }

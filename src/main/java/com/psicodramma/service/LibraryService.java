@@ -36,8 +36,7 @@ public class LibraryService {
     public boolean addEdizione(Edizione edizione, Raccolta raccolta){
         boolean out = raccolta.addEdizione(edizione);
         raccoltaDao.update(raccolta);
-        if(Stream.of(TipoAzione.values()).anyMatch(x -> x.toString().equals(raccolta.getNome())))
-            azioneDao.aggiungiAzione(edizione, raccolta);
+        addAzione(edizione, raccolta);
         return out;
     }
 
@@ -48,6 +47,25 @@ public class LibraryService {
             return true;
         }
         return false;
+    }
+
+    public boolean changeRaccolta(Edizione edizione, Raccolta source, Raccolta destination){
+        if(destination != null && destination.addEdizione(edizione)){
+            raccoltaDao.update(destination);
+            if(source != null){
+                if(source.removeEdizione(edizione)){
+                    raccoltaDao.update(source);
+                    addAzione(edizione, destination);
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
     public Raccolta createRaccolta(String nome, String descrizione, Utente proprietario){
@@ -78,5 +96,8 @@ public class LibraryService {
         return true;
     }
     
-
+    private void addAzione(Edizione edizione, Raccolta raccolta) {
+        if(Stream.of(TipoAzione.values()).anyMatch(x -> x.toString().equals(raccolta.getNome())))
+            azioneDao.aggiungiAzione(edizione, raccolta);
+    }
 }

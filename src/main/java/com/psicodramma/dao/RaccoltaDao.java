@@ -1,7 +1,5 @@
 package com.psicodramma.dao;
 
-import com.psicodramma.model.Edizione;
-import com.psicodramma.model.Opera;
 import com.psicodramma.model.Raccolta;
 
 import jakarta.persistence.EntityManager;

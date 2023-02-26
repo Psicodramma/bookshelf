@@ -1,12 +1,9 @@
 package com.psicodramma.UIControl;
 
 import java.io.IOException;
-import java.text.DateFormat;
 
 import com.psicodramma.App;
 import com.psicodramma.controller.LibroController;
-import com.psicodramma.model.Azione;
-import com.psicodramma.model.Interagibile;
 import com.psicodramma.model.Opera;
 
 import javafx.fxml.FXML;

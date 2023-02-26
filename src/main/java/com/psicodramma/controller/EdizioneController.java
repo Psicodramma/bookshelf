@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import com.psicodramma.App;
+import com.psicodramma.UIControl.DialogAggiungi;
 import com.psicodramma.UIControl.LikeCommentButton;
 import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Utente;
@@ -88,7 +89,8 @@ public class EdizioneController {
 
     @FXML
     private void modificaStato(){
-        
+        DialogAggiungi dia = new DialogAggiungi(utente, edizione);
+        dia.showAndWait();
     }
 
     @FXML

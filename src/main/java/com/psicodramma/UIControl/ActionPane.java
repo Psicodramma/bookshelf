@@ -6,10 +6,7 @@ import java.text.DateFormat;
 import com.psicodramma.App;
 import com.psicodramma.controller.EdizioneController;
 import com.psicodramma.controller.LibreriaController;
-import com.psicodramma.controller.LibroController;
 import com.psicodramma.model.Azione;
-import com.psicodramma.model.Edizione;
-import com.psicodramma.model.Interagibile;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

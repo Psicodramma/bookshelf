@@ -64,9 +64,7 @@ public class CommentTab extends AnchorPane{
     @FXML
     private void sendCommento() {
         String testoCommento = textboxCommento.getText().trim();
-        if(testoCommento.isEmpty()){
-            ToastController.showToast(ToastController.TOAST_ERROR, textboxCommento, "Commento vuoto");
-        }else{
+        if(!testoCommento.isEmpty()){
             commentList.add(interactionService.addComment(interagibile, utente, testoCommento));
             textboxCommento.setText("");
             setupListView();
