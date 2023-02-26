@@ -63,6 +63,7 @@ public class LibraryService {
                     return false;
                 }
             } else {
+                addAzione(edizione, destination);
                 return true;
             }
         } else {
