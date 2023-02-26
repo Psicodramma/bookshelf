@@ -131,7 +131,7 @@
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Label fx:id="labelPaese" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                              <Label fx:id="labelAnnoEdizione" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane>
@@ -145,7 +145,7 @@
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Label fx:id="labelLingua" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                              <Label fx:id="labelPaese" alignment="CENTER" text="Label" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                            </children>
                         </AnchorPane>
                      </children>

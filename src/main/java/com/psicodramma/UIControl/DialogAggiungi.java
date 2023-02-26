@@ -139,7 +139,7 @@ public class DialogAggiungi extends Dialog<Raccolta>{
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
         result.ifPresent(nomedescrizione -> {
-            libraryService.createRaccolta(nomedescrizione.getKey(), nomedescrizione.getValue(), utente);
+            obsList.add(libraryService.createRaccolta(nomedescrizione.getKey(), nomedescrizione.getValue(), utente));
             
         });
     }

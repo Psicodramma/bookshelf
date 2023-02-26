@@ -35,7 +35,7 @@ public class EdizioneController {
     @FXML private Button stateButton;
     @FXML private Label labelEditore;
     @FXML private Label labelPaese;
-    @FXML private Label labelLingua;
+    @FXML private Label labelAnnoEdizione;
     @FXML private Label labelPagine;
     @FXML private Label labelLinguaEdizione;
     @FXML private Label labelISBN;
@@ -66,7 +66,7 @@ public class EdizioneController {
             labelGeneri.setText(edizione.getOpera().getGeneriToString());
             labelEditore.setText(edizione.getEditore());
             labelPaese.setText(edizione.getPaese());
-            labelLingua.setText(edizione.getLingua());
+            labelAnnoEdizione.setText(edizione.getDataPubblicazione().toString());
             labelPagine.setText(String.valueOf(edizione.getNumeroPagine()));
             labelLinguaEdizione.setText(edizione.getLingua());
             labelISBN.setText(edizione.getIsbn());

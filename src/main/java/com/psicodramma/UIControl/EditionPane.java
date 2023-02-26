@@ -127,6 +127,11 @@ public class EditionPane extends ListCell<Edizione>{
             labelAnno.setText(DateFormat.getDateInstance().format(edizione.getDataPubblicazione()));
             labelEditore.setText(edizione.getEditore());
             labelLingua.setText(edizione.getLingua());
+            if(!showButtons){
+                pannello.getChildren().remove(readButton);
+                pannello.getChildren().remove(stateButton);
+                pannello.setPrefHeight(pannello.getHeight()-25);
+            }
         }
     }
 }
