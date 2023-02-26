@@ -7,8 +7,12 @@ import com.psicodramma.model.Commento;
 import com.psicodramma.model.Interagibile;
 import com.psicodramma.model.Utente;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 public class InteractionService {
-    // private EntityManagerFactory emf = Persistence.createEntityManagerFactory("default"); 
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("default"); 
     private InteragibileDao interagibileDao = new InteragibileDao();
 
     public Set<Commento> getComment(Interagibile riferimento){
@@ -36,5 +40,23 @@ public class InteractionService {
         riferimento.getCommenti().add(c);
         interagibileDao.addComment(c);
         return c;
+    }
+
+    public void addFollow(Utente me, Utente utente) {
+        EntityManager em = emf.createEntityManager();
+        me.addAmico(utente);
+        em.getTransaction().begin();
+        em.merge(me);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void removeFollow(Utente me, Utente utente) {
+        EntityManager em = emf.createEntityManager();
+        me.removeAmico(utente);
+        em.getTransaction().begin();
+        em.merge(me);
+        em.getTransaction().commit();
+        em.close();
     }
 }

@@ -12,11 +12,12 @@ public class Utente {
     private String password;
     @Basic(fetch = FetchType.LAZY)
     private String nazionalita;
-
-    
     @Embedded
     private Libreria libreria;
-    @Transient 
+    @ManyToMany
+    @JoinTable(name = "segue",
+        joinColumns = { @JoinColumn(name = "seguace", nullable = false)},
+        inverseJoinColumns = { @JoinColumn(name = "seguito", nullable = false)})
     private Set<Utente> amici;
 
     public Utente(){
@@ -60,6 +61,15 @@ public class Utente {
     }
     public Set<Utente> getAmici() {
         return amici;
+    }
+    public boolean addAmico(Utente utente) {
+        return amici.add(utente);
+    }
+    public boolean removeAmico(Utente utente) {
+        return amici.remove(utente);
+    }
+    public boolean isAmico(Utente utente) {
+        return amici.contains(utente);
     }
     public void setAmici(Set<Utente> amici) {
         this.amici = amici;

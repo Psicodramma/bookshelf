@@ -3,7 +3,6 @@ package com.psicodramma.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,6 +12,7 @@ import com.psicodramma.UIControl.EditionPane;
 import com.psicodramma.model.Edizione;
 import com.psicodramma.model.Raccolta;
 import com.psicodramma.model.Utente;
+import com.psicodramma.service.InteractionService;
 import com.psicodramma.service.LibraryService;
 
 import javafx.application.Platform;
@@ -30,7 +30,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -47,32 +46,39 @@ public class LibreriaController {
     
     private List<ObservableList<Edizione>> liste;
 
+    private InteractionService interactionService;
     private LibraryService libraryService;
     private Utente utente;
 
     public LibreriaController() {
         libraryService = new LibraryService();
+        interactionService = new InteractionService();
     }
 
     public LibreriaController(Utente utente){
+        this();
         this.utente = utente;
-        libraryService = new LibraryService();
     }
     
     @FXML
     private void initialize() { 
         if(!Objects.isNull(utente)){
             setupVBox();
+            Utente me = (Utente) App.getData();
 
-            if(utente.equals(App.getData())){
+            if(utente.equals(me)){
                 followButton.setGraphic(new ImageView(new File("bookshelf/src/main/resources/com/psicodramma/icon/plus.png").toURI().toString()));
                 followButton.setText("");
                 followButton.setOnMouseClicked(param -> newRaccolta());
             } else {
-                followButton.setOnMouseClicked(param -> segui());
-                followButton.setText("Segui");
+                if(!me.isAmico(utente)){
+                    followButton.setOnMouseClicked(param -> segui());
+                    followButton.setText("Segui");
+                } else {
+                    followButton.setOnMouseClicked(param -> unfollow());
+                    followButton.setText("Non seguire più");
+                }
             }
-
             labelUtente.setText(utente.getUsername());
         }
     }
@@ -89,7 +95,6 @@ public class LibreriaController {
     private void setupVBox(){
         raccolteBox.getChildren().clear();
         liste = new ArrayList<ObservableList<Edizione>>(utente.getLibreria().getRaccoltePersonali().size());
-        double height = 0;
         for (Raccolta r : utente.getLibreria().getRaccoltePersonali()) {
             // inizializzo le observableList
             ObservableList<Edizione> oal = FXCollections.observableArrayList();
@@ -115,21 +120,22 @@ public class LibreriaController {
             lv.setItems(oal);
             lv.setCellFactory((param) -> new EditionPane(false));
             ap.getChildren().addAll(labelNome, labelDesc, lv);
-            ap.setMinWidth(ap.getWidth());
-            ap.setMinHeight(ap.getHeight());
-            height += ap.getHeight();
             raccolteBox.getChildren().add(ap);
         }
-        //raccolteBox.setMinHeight(height);
-        //sPane.setMinHeight(height);
     }
 
     private void segui(){
-        try {
-            App.setRoot("timeline");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Utente me = (Utente) App.getData();
+        interactionService.addFollow(me, utente);
+        followButton.setOnMouseClicked(param -> unfollow());
+        followButton.setText("Non seguire più");
+    }
+
+    private void unfollow(){
+        Utente me = (Utente) App.getData();
+        interactionService.removeFollow(me, utente);
+        followButton.setOnMouseClicked(param -> segui());
+        followButton.setText("Segui");
     }
 
     private void newRaccolta(){
