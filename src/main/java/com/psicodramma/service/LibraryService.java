@@ -1,5 +1,6 @@
 package com.psicodramma.service;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.psicodramma.dao.AzioneDao;
@@ -27,7 +28,7 @@ public class LibraryService {
         Libreria l = u.getLibreria();
         l.setProprietario(u);
         for(int i=0; i<TipoAzione.values().length; i++){
-            l.addRaccolta(new Raccolta(TipoAzione.values()[i].toString(), u));
+            l.addRaccolta(new Raccolta(TipoAzione.values()[i].raccolta, u));
         }
 
         return l;
@@ -97,7 +98,7 @@ public class LibraryService {
     }
     
     private void addAzione(Edizione edizione, Raccolta raccolta) {
-        if(Stream.of(TipoAzione.values()).anyMatch(x -> x.toString().equals(raccolta.getNome())))
-            azioneDao.aggiungiAzione(edizione, raccolta);
+        Optional<TipoAzione> tipo = Stream.of(TipoAzione.values()).filter(x -> x.raccolta.equals(raccolta.getNome())).findFirst();
+        if(tipo.isPresent()) azioneDao.aggiungiAzione(edizione, raccolta, tipo.get());
     }
 }

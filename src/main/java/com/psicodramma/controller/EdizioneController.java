@@ -68,7 +68,7 @@ public class EdizioneController {
             labelLinguaEdizione.setText(edizione.getLingua());
             labelISBN.setText(edizione.getIsbn());
 
-            utente.getLibreria().getRaccolta(TipoAzione.LETTO.toString()).ifPresent((raccolta) -> readButton.setVisible(!raccolta.contains(edizione)));
+            utente.getLibreria().getRaccolta(TipoAzione.LETTO.raccolta).ifPresent((raccolta) -> readButton.setVisible(!raccolta.contains(edizione)));
 
             likesController.setInteragibile(edizione);
         } else {
@@ -82,7 +82,7 @@ public class EdizioneController {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            libraryService.addEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.LETTO.toString()).get());
+            libraryService.addEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.LETTO.raccolta).get());
         }
         readButton.setVisible(false);
     }

@@ -82,7 +82,7 @@ public class EditionPane extends ListCell<Edizione>{
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            libraryService.addEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.DALEGGERE.toString()).get());
+            libraryService.addEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.DALEGGERE.raccolta).get());
         }
         readButton.setText("In lettura");
         readButton.setOnMouseClicked((mouseEvent) -> removeToRead());
@@ -95,7 +95,7 @@ public class EditionPane extends ListCell<Edizione>{
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            libraryService.removeEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.DALEGGERE.toString()).get());
+            libraryService.removeEdizione(edizione, utente.getLibreria().getRaccolta(TipoAzione.DALEGGERE.raccolta).get());
         }
         readButton.setText("Da leggere");
         readButton.setOnMouseClicked((mouseEvent) -> setAsToRead());
