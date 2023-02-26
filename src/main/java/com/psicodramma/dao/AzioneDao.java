@@ -25,7 +25,7 @@ public class AzioneDao {
 
     public List<Azione> getAzioni(){
         EntityManager em = emf.createEntityManager();
-        List<Azione> res = em.createNativeQuery("select a.* from azione a", Azione.class).getResultList();;
+        List<Azione> res = em.createNativeQuery("select * from azione order by timestamp desc", Azione.class).getResultList();;
         em.close();
         return res;
     }
@@ -51,12 +51,13 @@ public class AzioneDao {
         return res;
     }
 
-    public void aggiungiAzione(Edizione edizione, Raccolta raccolta){
+    public void aggiungiAzione(Edizione edizione, Raccolta raccolta, TipoAzione tipo){
         EntityManager em = emf.createEntityManager();
-        Azione azione = new Azione(edizione, raccolta.getProprietario(), TipoAzione.valueOf(raccolta.getNome()), new Date());
+        Azione azione = new Azione(edizione, raccolta.getProprietario(), tipo, new Date());
         em.getTransaction().begin();
         em.persist(azione);
         em.getTransaction().commit();
         em.close();
     }
+
 }

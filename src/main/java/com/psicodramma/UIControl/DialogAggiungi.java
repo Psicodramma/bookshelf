@@ -93,6 +93,7 @@ public class DialogAggiungi extends Dialog<Raccolta>{
                             .collect(Collectors.toList());
 
         obsList.setAll(raccolte);
+        raccolteChoice.getSelectionModel().select(source);
         raccolteChoice.setItems(obsList);
     }
 
