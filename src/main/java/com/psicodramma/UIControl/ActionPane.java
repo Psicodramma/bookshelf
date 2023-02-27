@@ -78,7 +78,7 @@ public class ActionPane extends ListCell<Azione>{
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             likesController.setInteragibile(item);
             labelUtente.setText(item.getUtente().getUsername());
-            labelAzione.setText(item.getAzione().azione + " " + item.getEdizione().getOpera().getTitolo());
+            labelAzione.setText(item.getAzione().azione + " " + item.getEdizione().getOpera().getTitolo()+"("+ item.getEdizione().getEditore() +")");
             labelTimestamp.setText(DateFormat.getDateInstance().format(item.getTimestamp())); 
         }
     }
