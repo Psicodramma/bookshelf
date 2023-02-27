@@ -147,6 +147,8 @@ public class LibraryServiceTest {
         Edizione e = new Edizione(1, o);
         r.setEdizioni(new HashSet<>());
         r.addEdizione(e);
+        r2.setEdizioni(new HashSet<>());
+        r2.addEdizione(e);
         em.getTransaction().begin();
         em.persist(e);
         em.persist(r);
