@@ -137,10 +137,12 @@ public class LibraryServiceTest {
 
     @Test
     public void aggiungiAzione(){
+        //Inizializzazione dati per test
         EntityManager em = emf.createEntityManager();        
         Raccolta r = new Raccolta("In lettura", u);
         Raccolta r2 = new Raccolta("testAzione", u);
         Libreria l = new Libreria();
+        //Aggiunta delle raccolte alla libreria e libreria all'utente
         l.addRaccolta(r);
         l.addRaccolta(r2);
         u.setLibreria(l); 
@@ -149,27 +151,30 @@ public class LibraryServiceTest {
         r.addEdizione(e);
         r2.setEdizioni(new HashSet<>());
         r2.addEdizione(e);
+        //Persist degli oggetti sul database
         em.getTransaction().begin();
         em.persist(e);
         em.persist(r);
         em.persist(r2);
         em.getTransaction().commit();
         em.close();
+        //Aggiunta azioni su r e r2
         ls.addAzione(e, r);
         ls.addAzione(e, r2);
         AzioneDao azioneDao = new AzioneDao("test");
+        //Ritorna un optional che contiene l'azione fatta sulla raccolta "In lettura"
         Optional<Azione> azione = azioneDao.getAzioni().parallelStream().filter(x -> 
             x.getAzione().equals(TipoAzione.INLETTURA) 
             && x.getEdizione().equals(e) 
             && x.getUtente().equals(u))
             .findAny();
         assertTrue(azione.isPresent());
+        //Cerca se in tutte le azioni è presente quella fatta su r2 che sia diversa da quella fatta su "In lettura"
         assertFalse(azioneDao.getAzioni().parallelStream().anyMatch(x -> 
             !x.equals(azione.get()) 
             && Stream.of(TipoAzione.values()).anyMatch(y -> x.getAzione().equals(y)) 
             && x.getEdizione().equals(e) 
             && x.getUtente().equals(u)));
-
     }
 
     @AfterEach
